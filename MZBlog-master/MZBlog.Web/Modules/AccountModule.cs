@@ -44,6 +44,9 @@ namespace MZBlog.Web.Modules
 
         public dynamic LoginUser(LoginCommand loginCommand)
         {
+            if (!loginCommand.Code.ToUpper().Equals(Session["code"].ToString().ToUpper()))
+                return View["RegisterPage", new[] { "验证码不正确" }];
+
             if (!ModelValidationResult.IsValid)
             {
                 foreach (var err in ModelValidationResult.Errors)
@@ -75,7 +78,7 @@ namespace MZBlog.Web.Modules
 
         public dynamic RegisterUser(RegisterCommand registerCommand)
         {
-            if (registerCommand.Code != Session["code"].ToString())
+            if (!registerCommand.Code.ToUpper().Equals(Session["code"].ToString().ToUpper()))
                 return View["RegisterPage", new[] { "验证码不正确" }];
 
             if (!ModelValidationResult.IsValid)
