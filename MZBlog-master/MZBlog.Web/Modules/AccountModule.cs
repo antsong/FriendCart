@@ -29,6 +29,8 @@ namespace MZBlog.Web.Modules
             Post["/mz-register"] = _ => RegisterUser(this.BindAndValidate<RegisterCommand>());
 
             Get["/mz-code"] = _ => Code();
+
+            
         }
 
         public Negotiator Logout()
@@ -131,5 +133,6 @@ namespace MZBlog.Web.Modules
             string email = Request.Form["email"];
             return true;
         }
+
     }
 }

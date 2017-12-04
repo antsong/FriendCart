@@ -65,6 +65,7 @@
     <Compile Include="Cache\ICache.cs" />
     <Compile Include="Cache\RuntimeCache.cs" />
     <Compile Include="CommandResult.cs" />
+    <Compile Include="Commands\Accounts\AuthorCommand.cs" />
     <Compile Include="Commands\Accounts\ChangePasswordCommand.cs" />
     <Compile Include="Commands\Accounts\ChangeProfileCommand.cs" />
     <Compile Include="Commands\Accounts\LoginCommand.cs" />

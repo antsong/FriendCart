@@ -1,4 +1,5 @@
 ﻿using MZBlog.Core;
+using MZBlog.Core.Commands.Accounts;
 using MZBlog.Core.Commands.Posts;
 using MZBlog.Core.Extensions;
 using MZBlog.Core.ViewProjections.Admin;
@@ -36,18 +37,44 @@ namespace MZBlog.Web.Modules
             Post["/mz-admin/slug"] = _ => GetSlug();
 
             Get["/mz-admin/tables/{page?1}"] = _ => GetTables(_.page);
-            Get["/mz-admin/char"] = _ =>
-            {
-                return View["Char"];
-            };
+            Get["/mz-admin/char"] = _ => { return View["Char"]; };
+            Get["/mz-admin/delauthor/{Id}"] = _ => DeleteAutor(_.Id);
+            Get["/mz-admin/resetpwd/{Id}"] = _ => ResetPassword(_.Id);
         }
+
+        private dynamic ResetPassword(string Id)
+        {
+            return View["ChangePassword"];
+        }
+
+        private dynamic DeleteAutor(string Id)
+        {
+            var commandResult = _commandInvokerFactory.Handle<DeleteAuthorCommand, CommandResult>(new DeleteAuthorCommand()
+            {
+                AuthorId = Id
+            });
+            if (!commandResult.Success)
+            {
+                AddMessage("删除用户失败", "warning");
+            }
+            var tables =
+                _viewProjectionFactory.Get<AllTablesBindingModel, AllTablesViewModel>(new AllTablesBindingModel()
+                {
+                    Page = 1,
+                    Take = 25
+                });
+
+            return View["Tables", tables];
+        }
+
 
         private dynamic GetTables(int page)
         {
-            var tables = 
-                _viewProjectionFactory.Get<AllTablesBindingModel, AllTablesViewModel>(new AllTablesBindingModel() {
+            var tables =
+                _viewProjectionFactory.Get<AllTablesBindingModel, AllTablesViewModel>(new AllTablesBindingModel()
+                {
                     Page = page,
-                    Take =10
+                    Take = 25
                 });
 
             return View["Tables", tables];

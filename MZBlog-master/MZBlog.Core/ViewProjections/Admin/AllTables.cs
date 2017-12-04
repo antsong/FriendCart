@@ -28,7 +28,7 @@ namespace MZBlog.Core.ViewProjections.Admin
         public AllTablesBindingModel()
         {
             Page = 1;
-            Take = 10;
+            Take = 25;
         }
 
         public int Page { get; set; }

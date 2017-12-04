@@ -34,6 +34,7 @@
                             <th>Id</th>
                             <th>Roles</th>
                             <th>DisplayName</th>
+                            <th>Phone</th>
                             <th>Email</th>
                             <th>HashedPassword</th>
                             <th class="text-center" style="width:92px;">操作</th>
@@ -60,6 +61,9 @@
                                         @author.DisplayName
                                     </td>
                                     <td>
+                                        @author.Phone
+                                    </td>
+                                    <td>
                                         @author.Email
                                     </td>
                                     <td>
@@ -67,7 +71,7 @@
                                     </td>
                                     <td>
                                         <a href="~/mz-admin/posts/edit/@author.Id" class="btn btn-default btn-xs disabled">编辑</a>
-                                        <a href="~/mz-admin/posts/delete/@author.Id" class="btn btn-danger btn-xs disabled">删除</a>
+                                        <a href="~/mz-admin/delauthor/@author.Id" class="btn btn-danger btn-xs">删除</a>
                                     </td>
                                 </tr>
                             }
