@@ -1,0 +1,82 @@
+﻿@using System
+@using MZBlog.Core.Documents
+@using MZBlog.Core.Extensions
+@{
+    Layout = "_AdminLayout.cshtml";
+    ViewBag.Title = "手工配送";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li class="active"><i class="fa fa-whatsapp"></i> 企业管理</li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="well col-md-6 col-md-offset-3">
+        <form class="form-horizontal" action="~/mz-admin/distribution/new" method="post" role="form">
+
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label">配送类型：</label>
+                <label class="control-label">
+                    <input type="radio" name="Type" checked="checked" value="false"> 投保单
+                </label>
+                <label class="control-label">
+                    <input type="radio" name="Type" value="true"> 正式保单
+                </label>
+            </div>
+
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="PersonName">被保险人：</label>
+                <input type="text" class="form-control" name="PersonName" id="PersonName" />
+            </div>
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="PlateNum">车牌号：</label>
+                <input type="text" class="form-control" name="PlateNum" id="PlateNum" />
+            </div>
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="Phone">联系电话：</label>
+                <input type="text" class="form-control" name="Phone" id="Phone" />
+            </div>
+
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="StartTime">起保时间：</label>
+                <input class="Wdate form-control" name="StartTime" id="StartTime" type="text" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })" style="height: 34px;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;" />
+            </div>
+
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="StrongInsurance">交强险：</label>
+                <input type="number" class="form-control" name="StrongInsurance" id="StrongInsurance" />
+            </div>
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="CommercialInsurance">商业险：</label>
+                <input type="number" class="form-control" name="CommercialInsurance" id="CommercialInsurance" />
+            </div>
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="Tax">车船税：</label>
+                <input type="number" class="form-control" name="Tax" id="Tax" />
+            </div>
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="TaxNum">缴税通知单号：</label>
+                <input type="text" class="form-control" name="TaxNum" id="TaxNum" />
+            </div>
+
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="Address">送单地址：</label>
+                <textarea class="form-control" name="Address" id="Address" rows="3" cols="60"></textarea>
+            </div>
+            <div class="form-group form-inline">
+                <label class="col-sm-3 control-label" for="Description">配送要求：</label>
+                <textarea class="form-control" name="Description" id="Description" rows="3" cols="60"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-danger col-lg-offset-6">
+                确认
+            </button>
+        </form>
+    </div>
+</div>
+
+
+@section PostScripts{
+    <script src="~/scripts/My97DatePicker/WdatePicker.js"></script>
+}

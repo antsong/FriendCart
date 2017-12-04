@@ -1,0 +1,345 @@
+﻿@using System
+@using MZBlog.Core.Extensions
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<MZBlog.Core.ViewProjections.Admin.AllTablesViewModel>
+@{
+    Layout = "_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> <a href="~/mz-admin">控制面板</a> </li>
+        <li class="active"><i class="fa fa-weixin"></i> 数据管理</li>
+    </ol>
+</div>
+
+<div class="row">
+    <div role="tabpanel" data-example-id="togglable-tabs">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#Authors" aria-controls="Authors" role="tab" data-toggle="tab">Authors</a></li>
+            <li role="presentation"><a href="#BlogComments" aria-controls="BlogComments" role="tab" data-toggle="tab">BlogComments</a></li>
+            <li role="presentation"><a href="#BlogPosts" aria-controls="BlogPosts" role="tab" data-toggle="tab">BlogPosts</a></li>
+            <li role="presentation"><a href="#SpamHashes" aria-controls="SpamHashes" role="tab" data-toggle="tab">SpamHashes</a></li>
+            <li role="presentation"><a href="#Tags" aria-controls="Tags" role="tab" data-toggle="tab">Tags</a></li>
+            <li role="presentation"><a href="#Logs" aria-controls="Logs" role="tab" data-toggle="tab">Logs</a></li>
+        </ul>
+        <br />
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="Authors">
+                <table class="table table-bordered table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>Id</th>
+                            <th>Roles</th>
+                            <th>DisplayName</th>
+                            <th>Email</th>
+                            <th>HashedPassword</th>
+                            <th class="text-center" style="width:92px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 0;
+                            foreach (var author in Model.Authors)
+                            {
+                                i++;
+                                <tr>
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td>
+                                        @author.Id
+                                    </td>
+                                    <td>
+                                        @foreach (var role in author.Roles)
+                                        {<span class="label label-warning">@role</span>}
+                                    </td>
+                                    <td>
+                                        @author.DisplayName
+                                    </td>
+                                    <td>
+                                        @author.Email
+                                    </td>
+                                    <td>
+                                        @author.HashedPassword
+                                    </td>
+                                    <td>
+                                        <a href="~/mz-admin/posts/edit/@author.Id" class="btn btn-default btn-xs disabled">编辑</a>
+                                        <a href="~/mz-admin/posts/delete/@author.Id" class="btn btn-danger btn-xs disabled">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                            if (i == 0)
+                            {
+                                <tr><td colspan="7" align="center" class="success">没有找到对应的数据！</td></tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="BlogComments">
+                <table class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>Id</th>
+                            <th>CreatedTime</th>
+                            <th>Email</th>
+                            <th>IPAddress</th>
+                            <th>NickName</th>
+                            <th>PostId</th>
+                            <th>SiteUrl</th>
+                            <th class="text-center" style="width:92px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int j = 0;
+                            foreach (var blogComent in Model.Comments)
+                            {
+                                j++;
+                                <tr>
+                                    <td>
+                                        @j
+                                    </td>
+                                    <td>
+                                        @blogComent.Id
+                                    </td>
+                                    <td>
+                                        @blogComent.CreatedTime.ToChineseTime().ToString("yyyy-MM-dd HH:mm")
+                                    </td>
+                                    <td>
+                                        @blogComent.Email
+                                    </td>
+                                    <td>
+                                        @blogComent.IPAddress
+                                    </td>
+                                    <td>
+                                        @blogComent.NickName
+                                    </td>
+                                    <td>
+                                        @blogComent.PostId
+                                    </td>
+                                    <td>
+                                        @blogComent.SiteUrl
+                                    </td>
+                                    <td>
+                                        <a href="~/mz-admin/posts/edit/@blogComent.Id" class="btn btn-default btn-xs disabled">编辑</a>
+                                        <a href="~/mz-admin/posts/delete/@blogComent.Id" class="btn btn-danger btn-xs disabled">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                            if (j == 0)
+                            {
+                                <tr><td colspan="9" align="center" class="success">没有找到对应的数据！</td></tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="BlogPosts">
+                <table class="table table-bordered table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>Id</th>
+                            <th>Description</th>
+                            <th>Tags</th>
+                            <th>Title</th>
+                            <th>Link</th>
+                            <th>ViewCount</th>
+                            <th>Name</th>
+                            <th>AuthorEmail</th>
+                            <th class="text-center" style="width:92px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int k = 0;
+                            foreach (var post in Model.Posts)
+                            {
+                                k++;
+                                <tr>
+                                    <td>
+                                        @k
+                                    </td>
+                                    <td>
+                                        @post.Id
+                                    </td>
+                                    <td>
+                                        @post.Description
+                                    </td>
+                                    <td>
+                                        @foreach (var tag in post.Tags)
+                                        {<span class="label label-warning">@tag</span>}
+                                    </td>
+                                    <td>
+                                        @post.Title
+                                    </td>
+                                    <td>
+                                        @post.GetLink()
+                                    </td>
+                                    <td>
+                                        @post.ViewCount
+                                    </td>
+                                    <td>
+                                        @post.AuthorDisplayName
+                                    </td>
+                                    <td>
+                                        @post.AuthorEmail
+                                    </td>
+                                    <td>
+                                        <a href="~/mz-admin/posts/edit/@post.Id" class="btn btn-default btn-xs">编辑</a>
+                                        <a href="~/mz-admin/posts/delete/@post.Id" class="btn btn-danger btn-xs disabled">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                            if (k == 0)
+                            {
+                                <tr><td colspan="13" align="center" class="success">没有找到对应的数据！</td></tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="SpamHashes">
+                <table class="table table-bordered table-condensed table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>Id</th>
+                            <th>Pass</th>
+                            <th>PostKey</th>
+                            <th>Hash</th>
+                            <th>CreatedTime</th>
+                            <th class="text-center" style="width:92px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int m = 0;
+                            foreach (var spam in Model.Spams)
+                            {
+                                m++;
+                                <tr>
+                                    <td>
+                                        @m
+                                    </td>
+                                    <td>
+                                        @spam.Id
+                                    </td>
+                                    <td>
+                                        @spam.Pass
+                                    </td>
+                                    <td>
+                                        @spam.PostKey
+                                    </td>
+                                    <td>
+                                        @spam.Hash
+                                    </td>
+                                    <td>
+                                        @spam.CreatedTime
+                                    </td>
+                                    <td>
+                                        <a href="~/mz-admin/posts/edit/@spam.Id" class="btn btn-default btn-xs disabled">编辑</a>
+                                        <a href="~/mz-admin/posts/delete/@spam.Id" class="btn btn-danger btn-xs disabled">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                            if (m == 0)
+                            {
+                                <tr><td colspan="7" align="center" class="success">没有找到对应的数据！</td></tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Tags">
+                <table class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>Slug</th>
+                            <th>Name</th>
+                            <th>PostCount</th>
+                            <th class="text-center" style="width: 92px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int n = 0;
+                            foreach (var tag in Model.Tags)
+                            {
+                                n++;
+                                <tr>
+                                    <td>
+                                        @n
+                                    </td>
+                                    <td>
+                                        @tag.Slug
+                                    </td>
+                                    <td>
+                                        @tag.Name
+                                    </td>
+                                    <td>
+                                        @tag.PostCount
+                                    </td>
+                                    <td>
+                                        <a href="~/mz-admin/posts/edit/@tag.Slug" class="btn btn-default btn-xs disabled">编辑</a>
+                                        <a href="~/mz-admin/posts/delete/@tag.Slug" class="btn btn-danger btn-xs disabled">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                            if (n == 0)
+                            {
+                                <tr><td colspan="5" align="center" class="success">没有找到对应的数据！</td></tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="Logs">
+                <table class="table table-bordered table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>序号</th>
+                            <th>请求时间</th>
+                            <th>Content</th>
+                            <th class="text-center" style="width:92px;">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            n = 0;
+                            foreach (var tag in Model.Logs)
+                            {
+                                n++;
+                                <tr>
+                                    <td>
+                                        @n
+                                    </td>
+                                    <td>
+                                        @tag.CreatedOn
+                                    </td>
+                                    <td>
+                                        @tag.Content
+                                    </td>
+                                    <td>
+                                        <a href="~/mz-admin/posts/edit/@tag.Id" class="btn btn-default btn-xs disabled">编辑</a>
+                                        <a href="~/mz-admin/posts/delete/@tag.Id" class="btn btn-danger btn-xs disabled">删除</a>
+                                    </td>
+                                </tr>
+                            }
+                            if (n == 0)
+                            {
+                                <tr><td colspan="5" align="center" class="success">没有找到对应的数据！</td></tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿@using System
+@using System.Linq
+@using MZBlog.Core.Documents
+@using MZBlog.Core.Extensions
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<MZBlog.Core.ViewProjections.Dist.DistributionEditViewModel>
+@{
+    Layout = "_AdminLayout.cshtml";
+    ViewBag.Title = "手工配送打印";
+}
+@section PostScripts{
+    <style type="text/css">
+        table{
+        }
+
+            table td {
+                text-align: center;
+                padding: 6px 8px;
+            }
+    </style>
+    <script>
+        function printTable() {
+            var head = "<html><head><title></title></head><body>";
+            var foot = "</body></html>";
+            var newStr = $("#print").html();
+            var older = document.body.innerHTML;
+            var olderStr = document.body.innerHTML;
+            document.body.innerHTML = head + newStr;
+            pageSetupNull();
+            window.print();
+            document.body.innerHTML = older;
+        }
+
+        function pageSetupNull() {
+            var hkey_root, hkey_path, hkey_key;
+            hkey_root = "HKEY_CURRENT_USER";
+            hkey_path = "\\Software\\Microsoft\\Internet Explorer\\PageSetup\\";
+            try {
+                var RegWsh = new ActiveXObject("WScript.Shell");
+                hkey_key = "head";
+                RegWsh.RegWrite(hkey_root + hkey_path + hkey_key, "");
+                hkey_key = "foot";
+                RegWsh.RegWrite(hkey_root + hkey_path + hkey_key, "");
+            } catch (e) { }
+        }
+    </script>
+}
+<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height="0" id="WebBrowser3" width="0" VIEWASTEXT></OBJECT>
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li class="active"><i class="fa fa-whatsapp"></i> 企业管理</li>
+    </ol>
+</div>
+
+<div class="row" >
+    <div class="col-md-6 col-md-offset-3" id="print" >
+        <table style="width:100%;">
+            <tr>
+                <td colspan="8">@Model.Distribution.TypeDescript</td>
+            </tr>
+            <tr>
+                <td colspan="1">被保险人</td>
+                <td colspan="3">@Model.Distribution.PersonName</td>
+                <td colspan="1">车牌</td>
+                <td colspan="3">@Model.Distribution.PlateNum </td>
+            </tr>
+            <tr>
+                <td colspan="1">联系电话</td>
+                <td colspan="3">@Model.Distribution.Phone</td>
+                <td colspan="1">起保日期</td>
+                <td colspan="3">@Model.Distribution.StartTime.GetValueOrDefault().ToString("yyyy-MM-dd") </td>
+            </tr>
+            <tr>
+                <td>交强险</td>
+                <td>@Model.Distribution.StrongInsurance</td>
+                <td>商业险</td>
+                <td>@Model.Distribution.CommercialInsurance</td>
+                <td>车船税</td>
+                <td>@Model.Distribution.Tax</td>
+                <td>合计</td>
+                <td>@Model.Distribution.Total</td>
+            </tr>
+            <tr>
+                <td colspan="1">送单地址</td>
+                <td colspan="7">@Model.Distribution.Address</td>
+            </tr>
+            <tr>
+                <td colspan="1">缴税单号</td>
+                <td colspan="7">@Model.Distribution.TaxNum</td>
+            </tr>
+            <tr>
+                <td colspan="1">配送要求</td>
+                <td colspan="7">@Model.Distribution.Description</td>
+            </tr>
+            <tr>
+                <td colspan="1">客服经理</td>
+                <td colspan="7">@ViewBag.CurrentUser.Value.DisplayName</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <a href="javascript:printTable();" class="btn btn-default col-lg-offset-6">打印</a>
+    </div>
+</div>

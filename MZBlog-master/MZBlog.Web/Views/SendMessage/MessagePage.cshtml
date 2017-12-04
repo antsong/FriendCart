@@ -1,0 +1,38 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+@{
+    Layout = "_LoginLayout.cshtml";
+}
+<div class="well col-md-9 col-md-offset-1" id="login">
+    <form action="~/send-message" method="post" role="form">
+        @if (Model != null && Model.Length > 0)
+        {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var err in Model)
+                    {
+                        <li>@err</li>
+                    }
+                </ul>
+            </div>
+        }
+        <div class="form-group">
+            <label class="control-label" for="Phone">多个电话用逗号分隔</label>
+            <textarea class="form-control" name="Phone" rows="3">13871298164,13618625064
+             </textarea>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="Phone">模板格式：['标题','内容','详细内容']</label>
+            <textarea class="form-control" name="Content" rows="3">['NO0003319','宝贝','超级珍贵大宝贝']
+            </textarea>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="Temple" id="Temple">发送模板短信
+            </label>
+        </div>
+        <input type="hidden" name="ReturnUrl" value="@Nancy.Helpers.HttpUtility.HtmlEncode(ViewBag.ReturnUrl.Value)" />
+        <button type="submit" class="btn btn-primary btn-block">
+            发送<span class="glyphicon glyphicon-send"></span>
+        </button>
+    </form>
+</div>

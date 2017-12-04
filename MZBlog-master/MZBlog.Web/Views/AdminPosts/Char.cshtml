@@ -1,0 +1,921 @@
+﻿@using System
+@{
+    Layout = "_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> <a href="~/mz-admin">控制面板</a> </li>
+        <li class="active"><i class="fa fa-whatsapp"></i> 图形统计报表</li>
+        <li><a href="#" id="baidu">百度</a></li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="row">
+        <div id="char1" class="col-md-4"></div>
+        <div id="char2" class="col-md-4"></div>
+        <div id="char3" class="col-md-4"></div>
+        <div id="char4" class="col-md-12"></div>
+        <div id="char5" class="col-md-12"></div>
+        <div id="char6" class="col-md-12"></div>
+    </div>
+</div>
+
+@section PostScripts{
+    <script src="~/scripts/highstock.js"></script>
+    <script src="~/scripts/modules/exporting.js"></script>
+    @*<script>//demo说明
+        $(function () {
+            var chart;
+            $(document).ready(function () {
+                /**
+                 * highcharts数据图表
+                 *
+                 * param {object} chart 图表的相关参数配置
+                 * param {object} credits 图表版权信息参数配置
+                 * param {object} lang 图表语言参数配置
+                 * param {object} exporting 导出配置
+                 * param {object} title 标题配置
+                 * param {object} xAxis X轴配置
+                 * param {object} yAxis Y轴配置
+                 * param {object} plotOptions 各类型图表绘制配置
+                 * param {object} labels 数据图表标签配置
+                 * param {array} series 数据源配置
+                 */
+                chart = new Highcharts.Chart({
+                    /**
+                     * 图表配置
+                     *
+                     * param {string} renderTo 图表加载的位置
+                     * param {int} width 图表的宽度
+                     * param {int} hight 图表的高度
+                     * param {string} type 图表的默认类型
+                     * param {string} zoomType 图表的缩放选项，有：x, y, xy
+                     */
+                    chart: {
+                        // 图表加载的位置
+                        renderTo: 'container',
+                        // 图表宽度
+                        width: 600,
+                        // 图表高度
+                        hight: 500,
+                        // 默认图表类型
+                        type: 'line',
+                        // 缩放配置：x，y，xy
+                        zoomType: ''
+                    },
+
+                    /**
+                     * 版权信息配置，不用修改直接复制
+                     *
+                     * param {boolean} enabled 是否显示版权信息
+                     * param {string} href 版权信息所链接到的地址
+                     * param {string} text 版权信息所显示的文字内容
+                     */
+                    credits: {
+                        enabled: false,
+                        href: "http://www.msnui.tk/Admin",
+                        text: '微源网络科技'
+                    },
+
+                    /**
+                     * 语言配置，不用修改直接复制
+                     *
+                     * param {string} exportButtonTitle 导出按钮的标题文字
+                     * param {string} printButtonTitle 打印按钮的标题文字
+                     */
+                    lang: {
+                        exportButtonTitle: '导出PDF',
+                        printButtonTitle: '打印报表'
+                    },
+
+                    /**
+                     * 导出配置，不用修改直接复制
+                     *
+                     * param {boolean} enabled 是否允许导出
+                     * param {object} buttons 关于与导出和打印按钮相关的配置对象
+                     * param {string} filename 导出文件的文件名
+                     * param {string} type 默认导出文件的格式
+                     */
+                    exporting: {
+                        // 是否允许导出
+                        enabled: true,
+                        // 按钮配置
+                        buttons: {
+                            // 导出按钮配置
+                            exportButton: {
+                                menuItems: null,
+                                onclick: function () {
+                                    this.exportChart();
+                                }
+                            },
+                            // 打印按钮配置
+                            printButton: {
+                                enabled: false
+                            }
+                        },
+                        // 文件名
+                        filename: '报表',
+                        // 导出文件默认类型
+                        type: 'application/pdf'
+                    },
+
+                    /**
+                     * 图表的标题
+                     *
+                     *param {string} text 图表的标题，如果不需要显示标题，直接设置为空字符串就行
+                     */
+                    title: {
+                        text: '联合图表实例'
+                    },
+
+                    /**
+                     * X轴配置
+                     *
+                     * param {array} categories X轴坐标分类值
+                     * param {object} labels 坐标标签配置对象
+                     * param {int} tickInterval 坐标轴的步进值
+                     * param {object} title 坐标轴标题
+                     */
+                    xAxis: {
+                        // X轴分类
+                        categories: ['苹果', '桔子', '梨子', '香蕉', '李子'],
+                        // 坐标轴的标签
+                        labels: {
+                            // 标签位置
+                            align: 'center',
+                            // 标签格式化
+                            formatter: function () {
+                                return this.value;
+                            },
+                            // 标签旋转度数
+                            rotation: 20,
+                            // 标签交错显示的行数
+                            staggerLines: 1
+                        },
+                        // X轴的步进值，决定隔多少个显示一个
+                        tickInterval: 1,
+                        // 坐标轴标题
+                        title: {
+                            text: '水果分类'
+                        }
+                    },
+
+                    /**
+                     * y轴配置
+                     *
+                     * param {object} labels 坐标标签配置对象
+                     * param {int} tickInterval 坐标轴的步进值
+                     * param {object} title 坐标轴标题
+                     */
+                    yAxis: {
+                        // 坐标轴的标签
+                        labels: {
+                            // 标签位置
+                            align: 'right',
+                            // 标签格式化
+                            formatter: function () {
+                                return this.value + '个';
+                            }
+                        },
+                        // y轴的步进值，决定隔多少个显示一个
+                        tickInterval: 3,
+                        // 坐标轴标题
+                        title: {
+                            text: '水果个数'
+                        }
+                    },
+
+                    /**
+                     * 绘图的各选项、参数配置
+                     * param {object} series 数列，可以配置各种不同类型图表的默认参数
+                     * param {object} bar 横向柱状图配置参数
+                     * param {object} column 纵向柱状图配置参数
+                     * param {object} line 线性图
+                     * param {object} spline 圆滑曲线图配置参数
+                     * param {object} pie 饼状图
+                     */
+                    plotOptions: {
+                        /**
+                         * 数列，对于所有的图表都可以适用的配置参数，属于共用性质。
+                         */
+                        series: {
+                            // 鼠标样式
+                            cursor: 'pointer',
+                            events: {
+                                // 数据标注不可点击
+                                legendItemClick: false
+                            },
+                            // 当是柱状图时，柱状的宽度
+                            pointWidth: 15
+                        },
+
+                        /**
+                         * 横向柱状图
+                         */
+                        bar: {
+                            // 数据点的点击事件
+                            events: {
+                                click: function (event) {
+                                    //alert('The bar was clicked, and you can add any other functions.');
+                                }
+                            },
+                            // 当值为0时，在图表中柱状体的长度设置
+                            minPointLength: 2,
+                            // 当具体的数据点被点击时的事件响应函数。如果不需要事件响应，可以删除。
+                            point: {
+                                events: {
+                                    click: function () {
+                                        //alert('This point was clicked. You can and any other functions.');
+                                    }
+                                }
+                            },
+                            // 是否在图注中显示。
+                            showInLegend: true,
+                            // 是否堆叠，默认：null，数值：normal，百分比：percent
+                            //stacking: 'normal',
+                            // 调整图像顺序关系
+                            zIndex: 1
+                        },
+
+                        /**
+                         * 纵向柱状图
+                         */
+                        column: {
+                            // 数据点的点击事件
+                            events: {
+                                click: function (event) {
+                                    //alert('The bar was clicked, and you can add any other functions.');
+                                }
+                            },
+                            // 当值为0时，在图表中柱状体的长度设置
+                            minPointLength: 2,
+                            // 当具体的数据点被点击时的事件响应函数。如果不需要事件响应，可以删除。
+                            point: {
+                                events: {
+                                    click: function () {
+                                        //alert('This point was clicked. You can and any other functions.');
+                                    }
+                                }
+                            },
+                            // 是否在图注中显示。
+                            showInLegend: true,
+                            // 是否堆叠，默认：null，数值：normal，百分比：percent
+                            //stacking: null,
+                            // 调整图像顺序关系
+                            zIndex: 2
+                        },
+
+                        /**
+                         * 线性图，与spline的区别在于点与点之间的连线是直线还是圆滑曲线。
+                         */
+                        line: {
+                            // 允许线性图上的数据点进行点击
+                            allowPointSelect: true,
+                            // 数据点的点击事件
+                            events: {
+                                click: function (event) {
+                                    //alert('The bar was clicked, and you can add any other functions.');
+                                }
+                            },
+                            // 当具体的数据点被点击时的事件响应函数。如果不需要事件响应，可以删除。
+                            point: {
+                                events: {
+                                    click: function () {
+                                        //alert('This point on the line was clicked. You can and any other functions.');
+                                    }
+                                }
+                            },
+                            // 是否在图注中显示。
+                            showInLegend: true,
+                            // 调整图像顺序关系
+                            zIndex: 3
+                        },
+
+                        /**
+                         * 曲线图，与spline的区别在于点与点之间的连线是直线还是圆滑曲线。
+                         */
+                        spline: {
+                            // 允许线性图上的数据点进行点击
+                            allowPointSelect: true,
+                            // 数据点的点击事件
+                            events: {
+                                click: function (event) {
+                                    //alert('The bar was clicked, and you can add any other functions.');
+                                }
+                            },
+                            // 当具体的数据点被点击时的事件响应函数。如果不需要事件响应，可以删除。
+                            point: {
+                                events: {
+                                    click: function () {
+                                        //alert('This point on the line was clicked. You can and any other functions.');
+                                    }
+                                }
+                            },
+                            // 是否在图注中显示。
+                            showInLegend: true,
+                            // 调整图像顺序关系
+                            zIndex: 3
+                        },
+
+                        /**
+                         * 饼状图
+                         */
+                        pie: {
+                            // 是否允许扇区点击
+                            allowPointSelect: true,
+                            // 点击后，滑开的距离
+                            slicedOffset: 5,
+                            // 饼图的中心坐标
+                            center: [100, 80],
+                            // 饼图的大小
+                            size: 100,
+                            // 数据标签
+                            dataLabels: {
+                                // 是否允许标签
+                                enabled: true,
+                                // 标签与图像元素之间的间距
+                                distance: 10
+                            },
+                            // 数据点的点击事件
+                            events: {
+                                click: function (event) {
+                                    //alert('The bar was clicked, and you can add any other functions.');
+                                }
+                            },
+                            // 是否忽略隐藏的项
+                            ignoreHiddenPoint: true,
+                            // 当具体的数据点被点击时的事件响应函数。如果不需要事件响应，可以删除。
+                            point: {
+                                events: {
+                                    click: function () {
+                                        //alert('This point on the line was clicked. You can and any other functions.');
+                                    }
+                                }
+                            },
+                            // 是否在图注中显示。
+                            showInLegend: false,
+                            // 调整图像顺序关系
+                            zIndex: 0
+                        }
+                    },
+
+                    /**
+                     * 数据图表标签配置
+                     *
+                     * param {array} items 项目配置
+                     */
+                    labels: {
+                    items: [{
+                        html: '水果总消耗量',
+                        style: {
+                            left: '65px',
+                            top: '8px',
+                            color: 'black'
+                        }
+                    }]
+                    },
+
+                /**
+                 * 数据源配置，本身是一个对象数组
+                 *
+                 * param {string} type 图表的类型
+                 * param {string} name 数据序列的名称
+                 * param {array} data 数据序列，是一个对象数组
+                 */
+                series: [{
+                    type: 'column',
+                    name: 'Jane',
+                    data: [3, 2, 1, 3, 4]
+                }, {
+                    type: 'column',
+                    name: 'John',
+                    data: [2, 3, 5, 7, 6]
+                }, {
+                    type: 'column',
+                    name: 'Joe',
+                    data: [4, 3, 3, 9, 0]
+                }, {
+                    type: 'spline',
+                    name: '平均',
+                    data: [3, 2.67, 3, 6.33, 3.33]
+                }, {
+                    type: 'pie',
+                    name: '水果总消耗量',
+                    data: [{
+                        name: 'Jane',
+                        y: 13,
+                        color: '#4572A7' // Jane's color
+                    }, {
+                        name: 'John',
+                        y: 23,
+                        color: '#AA4643' // John's color
+                    }, {
+                        name: 'Joe',
+                        y: 19,
+                        color: '#89A54E' // Joe's color
+                    }]
+                }]
+            });
+        });
+
+        });
+
+        $(function() {
+            $("#baidu").click(function() {
+                var w = $(window).width();
+                var h = $(window).height();
+                var openW = (w - 400) / 2;
+                var openH = (h - 300) / 2;
+
+                //window.document.open("http://www.baidu.com", "百度登录", "");//第三个参数没有则默认打开一个页面，而不是open窗体
+
+                window.document.open('http://openapi.qzone.qq.com/oauth/show?which=Login&display=pc&client_id=200004&response_type=code&state=34f922a82217b6dfb3e916df43ddedea&scope=get_user_info,add_share,get_info,add_t&display=&redirect_uri=http%3A%2F%2Fpassport.youku.com%2Fpartner_unifiedThirdpartCallback', 'QQ登录', 'height=300, width=400, top=' + openH + ', left=' + openW + ', toolbar=no, menubar=no, scrollbars=no, resizable=no,location=no, status=no') //这句要写成一行 
+            });
+        });
+    </script>*@
+
+    <script>
+
+        //判断数组中是否包含某个元素
+        Array.prototype.contains = function (obj) {
+            var i = this.length;
+            while (i--) {
+                if (this[i] === obj) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        var HighChart = {
+            ChartDataFormate: {
+                FormateNOGroupData: function (data) {
+                    var categories = [];
+                    var datas = [];
+                    for (var i = 0; i < data.length; i++) {
+                        categories.push(data[i].name || "");
+                        datas.push([data[i].name, data[i].value || 0]);
+                    }
+                    return { category: categories, data: datas };
+                },
+                FormatGroupData: function (data) {//处理分组数据，数据格式：name：XXX，group：XXX，value：XXX用于折线图、柱形图（分组，堆积）
+                    var names = new Array();
+                    var groups = new Array();
+                    var series = new Array();
+                    for (var i = 0; i < data.length; i++) {
+                        if (!names.contains(data[i].name))
+                            names.push(data[i].name);
+                        if (!groups.contains(data[i].group))
+                            groups.push(data[i].group);
+                    }
+                    for (var i = 0; i < groups.length; i++) {
+                        var temp_series = {};
+                        var temp_data = new Array();
+                        for (var j = 0; j < data.length; j++) {
+                            for (var k = 0; k < names.length; k++)
+                                if (groups[i] == data[j].group && data[j].name == names[k])
+                                    temp_data.push(data[j].value);
+                        }
+                        temp_series = { name: groups[i], data: temp_data };
+                        series.push(temp_series);
+                    }
+                    return { category: names, series: series };
+                },
+                FormatBarLineData: function (data, name, name1) {//数据类型：name：XXX，value：XXX，处理结果主要用来展示X轴为日期的具有增幅的趋势的图
+                    var category = [];
+                    var series = [];
+                    var s1 = [];
+                    var s2 = [];
+                    for (var i = 1; i < data.length; i++) {
+                        if (!category.contains(data[i].name))
+                            category.push(data[i].name);
+                        s1.push(data[i].value);
+                        var growth = 0;
+                        if (data[i].value != data[i - 1].value)
+                            if (data[i - 1].value != 0)
+                                growth = Math.round((data[i].value / data[i - 1].value - 1) * 100);
+                            else
+                                growth = 100;
+                        s2.push(growth);
+                    }
+                    series.push({ name: name, color: '#4572A7', type: 'column', yAxis: 1, data: s1, tooltip: { valueStuffix: '' } });
+                    series.push({ name: name1, color: '#89A54E', type: 'spline', yAxis: 1, data: s2, tooltip: { valueStuffix: '%' } });
+                    return { series: series };
+                }
+            },
+            ChartOptionTemplates: {
+                Pie: function (data, name, title) {
+                    var pie_datas = HighChart.ChartDataFormate.FormateNOGroupData(data);
+                    var option = {
+                        chart: {
+                            plotBackgroundColor: null,
+                            plotBorderWidth: null,
+                            plotShadow: false
+                        },
+                        title: {
+                            text: title || ''
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        tooltip: {
+                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                        },
+                        lang: {
+                            printChart: '打印图表',
+                            downloadPNG: '下载PNG 图片',
+                            downloadJPEG: '下载JPEG图片',
+                            downloadPDF: '下载PDF 图片',
+                            downloadSVG: '下载SVG 矢量图',
+                            contextButtonTitle: '下载图片'
+                        },
+                        plotOptions: {
+                            pie: {
+                                allowPointSelect: true,
+                                cursor: 'pointer',
+                                dataLabels: {
+                                    enabled: false
+                                },
+                                showInLegend: true
+                            }
+                        },
+                        series: [{
+                            type: 'pie',
+                            name: name || '',
+                            data: pie_datas.data
+                        }]
+                    };
+                    return option;
+                },
+                DrillDownPie: function (data, name, title) {
+                    var drilldownpie_datas;
+                    var option = {
+                        chart: {
+                            type: 'pie'
+                        },
+                        title: {
+                            text: title || ''
+                        },
+                        subtitle: {
+                            text: '请点击饼图项看详细占比'
+                        },
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '{point.name}: {point.y:.1f}%'
+                                }
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+                            pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}%</b> of total<br/>'
+                        },
+                        series: [{
+                            name: name || '',
+                            colorByPoint: true,
+                            data: drilldownpie_datas.fir_data
+                        }],
+                        drilldown: {
+                            series: drilldownpie_datas.series
+                        }
+                    };
+                    return option;
+                },
+                Line: function (data, name, title) {
+                    var line_datas = HighChart.ChartDataFormate.FormatGroupData(data);
+                    var option = {
+                        title: {
+                            text: title || '',
+                            x: -20
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        xAxis: {
+                            categories: line_datas.category
+                        },
+                        yAxis: {
+                            title: {
+                                text: name || ''
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }]
+                        },
+                        tooltip: {
+                            valueSuffix: ''
+                        },
+                        lang: {
+                            printChart: '打印图表',
+                            downloadPNG: '下载PNG 图片',
+                            downloadJPEG: '下载JPEG图片',
+                            downloadPDF: '下载PDF 图片',
+                            downloadSVG: '下载SVG 矢量图',
+                            contextButtonTitle: '下载图片'
+                        },
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        },
+                        series: line_datas.series
+                    };
+                    return option;
+                },
+                Bars: function (data, is_stack, is_stack_percent, name, title) {
+                    var bars_datas = HighChart.ChartDataFormate.FormatGroupData(data);
+                    var option = {
+                        chart: {
+                            type: 'column'
+                        },
+                        title: {
+                            text: title || ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                        credits: {
+                            enabled: false
+                        },
+                        xAxis: {
+                            categories: bars_datas.category
+                        },
+                        yAxis: {
+                            //min: 0,
+                            title: {
+                                text: name
+                            }
+                        },
+                        tooltip: {
+                            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name};</td>' + '<td style="padding:0"><b>{point.y:.1f}</b></td></tr>',
+                            footerFormat: '</table>',
+                            shared: true,
+                            useHTML: true
+                        },
+                        lang: {
+                            printChart: '打印图表',
+                            downloadPNG: '下载PNG 图片',
+                            downloadJPEG: '下载JPEG图片',
+                            downloadPDF: '下载PDF 图片',
+                            downloadSVG: '下载SVG 矢量图',
+                            contextButtonTitle: '下载图片'
+                        },
+                        plotOptions: {
+                            column: {
+                                pointPadding: 0.2,
+                                borderWidth: 0
+                            }
+                        },
+                        series: bars_datas.series
+                    };
+                    var stack_option = {};
+                    if (is_stack && !is_stack_percent) {
+                        stack_option = {
+                            tooltip: {
+                                formatter: function () {
+                                    return '<b>' + this.x + '</b><br/>' +
+                                this.series.name + ': ' + this.y + '<br/>' +
+                                'Total: ' + this.point.stackTotal;
+                                }
+                            },
+                            plotOptions: {
+                                column: {
+                                    stacking: 'normal',
+                                    dataLabels: {
+                                        enabled: true,
+                                        color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white'
+                                    }
+                                }
+                            }
+                        };
+                    }
+                    if (!is_stack && is_stack_percent) {
+                        stack_option = {
+                            tooltip: {
+                                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+                                shared: true
+                            },
+                            plotOptions: {
+                                column: {
+                                    stacking: 'percent'
+                                }
+                            }
+                        };
+                    }
+                    return $.extend({}, option, stack_option);
+                },
+                Pyramid: function (data, name, title) {
+                    var pyramid_datas = HighChart.ChartDataFormate.FormateNOGroupData(data);
+                    var option = {
+                        chart: {
+                            type: 'pyramid',
+                            marginRight: 100
+                        },
+                        title: {
+                            text: title || '',
+                            x: -50
+                        },
+                        plotOptions: {
+                            series: {
+                                dataLabels: {
+                                    enabled: true,
+                                    format: '<b>{point.name}</b> ({point.y:,.0f})',
+                                    color: 'black',
+                                    softConnector: true
+                                }
+                            }
+                        },
+                        legend: {
+                            enabled: false
+                        },
+                        series: [{
+                            name: name || '',
+                            data: pyramid_datas.data
+                        }]
+                    };
+                    return option;
+                },
+                BarLine: function (data, name, name1, title) {
+                    var barline_datas = HighChart.ChartDataFormate.FormatBarLineData(data);
+                    var option = {
+                        chart: {
+                            zoomType: 'xy'
+                        },
+                        title: {
+                            text: title || ''
+                        },
+                        subtitle: {
+                            text: ''
+                        },
+                        xAxis: [{
+                            categories: barline_datas.category
+                        }],
+                        yAxis: [{ // Primary yAxis
+                            labels: {
+                                format: '{value}',
+                                style: {
+                                    color: '#89A54E'
+                                }
+                            },
+                            title: {
+                                text: name || '',
+                                style: {
+                                    color: '#89A54E'
+                                }
+                            }
+                        }, { // Secondary yAxis
+                            title: {
+                                text: name1 || '',
+                                style: {
+                                    color: '#4572A7'
+                                }
+                            },
+                            labels: {
+                                format: '{value}',
+                                style: {
+                                    color: '#4572A7'
+                                }
+                            },
+                            opposite: true
+                        }],
+                        tooltip: {
+                            shared: true
+                        },
+                        legend: {
+                            layout: 'horizontal',
+                            align: 'center',
+                            verticalAlign: 'bottom'
+                        },
+                        series: [{
+                            name: 'Rainfall',
+                            color: '#4572A7',
+                            type: 'column',
+                            yAxis: 1,
+                            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+                            tooltip: {
+                                valueSuffix: ' mm'
+                            }
+
+                        }, {
+                            name: 'Temperature',
+                            color: '#89A54E',
+                            type: 'spline',
+                            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+                            tooltip: {
+                                valueSuffix: '°C'
+                            }
+                        }]
+
+
+
+
+                    };
+                }
+            },
+            RenderChart: function (option, container) {
+                container.highcharts(option);
+            }
+        };
+
+        $(document).ready(function() {
+            var data = [{ name: '租赁补贴', value: 115 }, { name: '实物配租', value: 222 }, { name: '货币补贴', value: 100 }];
+            var opt = HighChart.ChartOptionTemplates.Pie(data, '所占比率', "饼图示例");
+            var container = $("#char1");
+            HighChart.RenderChart(opt, container);
+        });
+
+        $(function () {
+            var data = [
+            { name: '2013-01', group: 'olive', value: 116 },
+            { name: '2013-01', group: 'momo', value: 115 },
+            { name: '2013-01', group: 'only', value: 222 },
+            { name: '2013-01', group: 'for', value: 324 },
+            { name: '2013-02', group: 'olive', value: 156 },
+            { name: '2013-02', group: 'momo', value: 185 },
+            { name: '2013-02', group: 'only', value: 202 },
+            { name: '2013-02', group: 'for', value: 34 },
+            { name: '2013-03', group: 'olive', value: 16 },
+            { name: '2013-03', group: 'momo', value: 51 },
+            { name: '2013-03', group: 'only', value: 22 },
+            { name: '2013-03', group: 'for', value: 84 }
+            ];
+            var opt = HighChart.ChartOptionTemplates.Line(data, '数量', "折线图示例");
+            var container = $("#char2");
+            HighChart.RenderChart(opt, container);
+        });
+
+        $(function () {
+            var data = [
+            { name: '2013-01', group: 'olive', value: 116 },
+            { name: '2013-01', group: 'momo', value: 115 },
+            { name: '2013-01', group: 'only', value: 222 },
+            { name: '2013-01', group: 'for', value: 324 },
+            { name: '2013-01', group: 'over', value: 324 },
+            { name: '2013-02', group: 'olive', value: 16 },
+            { name: '2013-02', group: 'momo', value: 15 },
+            { name: '2013-02', group: 'only', value: 22 },
+            { name: '2013-02', group: 'for', value: 34 },
+            { name: '2013-02', group: 'over', value: 324 },
+            { name: '2013-03', group: 'olive', value: 16 },
+            { name: '2013-03', group: 'momo', value: 225 },
+            { name: '2013-03', group: 'only', value: 92 },
+            { name: '2013-03', group: 'for', value: 84 },
+            { name: '2013-03', group: 'over', value: 224 },
+            ];
+            var opt = HighChart.ChartOptionTemplates.Bars(data, '', '', '数量', "分组柱形图示例");
+            var container = $("#char3");
+            HighChart.RenderChart(opt, container);
+        });
+
+        $(function () {
+            var data = [
+            { name: '2013-01', group: 'olive', value: 116 },
+            { name: '2013-01', group: 'momo', value: 115 },
+            { name: '2013-01', group: 'only', value: 222 },
+            { name: '2013-01', group: 'for', value: 324 },
+            { name: '2013-01', group: 'over', value: 324 },
+
+            { name: '2013-02', group: 'olive', value: 156 },
+            { name: '2013-02', group: 'momo', value: 185 },
+            { name: '2013-02', group: 'only', value: 202 },
+            { name: '2013-02', group: 'for', value: 134 },
+            { name: '2013-02', group: 'over', value: 324 },
+
+            { name: '2013-03', group: 'olive', value: 16 },
+            { name: '2013-03', group: 'momo', value: 51 },
+            { name: '2013-03', group: 'only', value: 22 },
+            { name: '2013-03', group: 'for', value: 84 },
+            { name: '2013-03', group: 'over', value: 34 },
+
+            { name: '2013-04', group: 'olive', value: 116 },
+            { name: '2013-04', group: 'momo', value: 115 },
+            { name: '2013-04', group: 'only', value: 222 },
+            { name: '2013-04', group: 'for', value: 324 },
+            { name: '2013-04', group: 'over', value: 324 },
+
+            { name: '2013-05', group: 'olive', value: 116 },
+            { name: '2013-05', group: 'momo', value: 115 },
+            { name: '2013-05', group: 'only', value: 222 },
+            { name: '2013-05', group: 'for', value: 324 },
+            { name: '2013-05', group: 'over', value: 324 }
+
+            ];
+            var opt1 = HighChart.ChartOptionTemplates.Bars(data, true, '', '垂直坐标', "堆积柱形图示例");
+            var container1 = $("#char4");
+            HighChart.RenderChart(opt1, container1);
+            var opt2 = HighChart.ChartOptionTemplates.Bars(data, '', true, '垂直坐标', "堆积百分比柱形图示例");
+            var container2 = $("#char5");
+            HighChart.RenderChart(opt2, container2);
+        });
+    </script>
+}

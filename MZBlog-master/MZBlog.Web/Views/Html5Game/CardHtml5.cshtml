@@ -1,0 +1,1547 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    <style>
+        article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+            display: block;
+        }
+
+        audio, canvas, video {
+            display: inline-block;
+        }
+
+            audio:not([controls]) {
+                display: none;
+                height: 0;
+            }
+
+        [hidden] {
+            display: none;
+        }
+
+        html {
+            font-family: sans-serif;
+            -ms-text-size-adjust: 100%;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            margin: 0;
+        }
+
+        a:focus {
+            outline: thin dotted;
+        }
+
+        a:active, a:hover {
+            outline: 0;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 0.67em 0;
+        }
+
+        abbr[title] {
+            border-bottom: 1px dotted;
+        }
+
+        b, strong {
+            font-weight: bold;
+        }
+
+        dfn {
+            font-style: italic;
+        }
+
+        hr {
+            -moz-box-sizing: content-box;
+            box-sizing: content-box;
+            height: 0;
+        }
+
+        mark {
+            background: #ff0;
+            color: #000;
+        }
+
+        code, kbd, pre, samp {
+            font-family: monospace,serif;
+            font-size: 1em;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+
+        q {
+            quotes: "\201C" "\201D" "\2018" "\2019";
+        }
+
+        small {
+            font-size: 80%;
+        }
+
+        sub, sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+        }
+
+        sup {
+            top: -0.5em;
+        }
+
+        sub {
+            bottom: -0.25em;
+        }
+
+        img {
+            border: 0;
+        }
+
+        svg:not(:root) {
+            overflow: hidden;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        fieldset {
+            border: 1px solid #c0c0c0;
+            margin: 0 2px;
+            padding: 0.35em 0.625em 0.75em;
+        }
+
+        legend {
+            border: 0;
+            padding: 0;
+        }
+
+        button, input, select, textarea {
+            font-family: inherit;
+            font-size: 100%;
+            margin: 0;
+        }
+
+        button, input {
+            line-height: normal;
+        }
+
+        button, select {
+            text-transform: none;
+        }
+
+        button, html input[type="button"], input[type="reset"], input[type="submit"] {
+            -webkit-appearance: button;
+            cursor: pointer;
+        }
+
+            button[disabled], html input[disabled] {
+                cursor: default;
+            }
+
+        input[type="checkbox"], input[type="radio"] {
+            box-sizing: border-box;
+            padding: 0;
+        }
+
+        input[type="search"] {
+            -webkit-appearance: textfield;
+            -moz-box-sizing: content-box;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+        }
+
+            input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+                -webkit-appearance: none;
+            }
+
+        button::-moz-focus-inner, input::-moz-focus-inner {
+            border: 0;
+            padding: 0;
+        }
+
+        textarea {
+            overflow: auto;
+            vertical-align: top;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+    </style>
+    <style>
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-weight: inherit;
+            font-style: inherit;
+            font-family: inherit;
+            font-size: 100%;
+            vertical-align: baseline;
+        }
+
+        body {
+            line-height: 1;
+            color: #000;
+            background: #fff;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        a img {
+            border: none;
+        }
+
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background-color: #45a176;
+            color: #333;
+            font-family: 'Open Sans',sans-serif;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            overflow: hidden;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+        }
+
+        #container {
+            position: absolute;
+            top: calc(50% + 1.5rem);
+            left: 50%;
+            -webkit-transform: translate3d(-50%,-50%,0);
+            -moz-transform: translate3d(-50%,-50%,0);
+            -o-transform: translate3d(-50%,-50%,0);
+            -ms-transform: translate3d(-50%,-50%,0);
+            transform: translate3d(-50%,-50%,0);
+        }
+
+        #topbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #265941;
+            text-align: center;
+        }
+
+            #topbar input {
+                background: none;
+                border: 1px solid #fff;
+                outline: none;
+                margin: .25rem;
+                padding: .5rem;
+                font: inherit;
+                font-size: .875rem;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            #topbar button {
+                background: none;
+                border: 1px solid #fff;
+                outline: none;
+                margin: .25rem;
+                padding: .5rem;
+                font: inherit;
+                font-size: .875rem;
+                color: #fff;
+                cursor: pointer;
+            }
+
+                #topbar button:hover {
+                    background-color: #fff;
+                    color: #444;
+                }
+
+        .message {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem .5rem;
+            font-size: .5rem;
+            text-align: center;
+        }
+
+        .card {
+            position: absolute;
+            display: inline-block;
+            left: -1.9375rem;
+            top: -2.75rem;
+            width: 3.875rem;
+            height: 5.5rem;
+            background-color: #fff;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+            box-shadow: 0 1px 1px rgba(0,0,0,0.15);
+            cursor: default;
+        }
+
+            .card .topleft, .card .bottomright {
+                position: absolute;
+                font-size: .7rem;
+                text-align: center;
+                line-height: 1;
+                letter-spacing: -.1rem;
+                font-family: 'Ubuntu Condensed',sans-serif;
+                white-space: pre;
+            }
+
+            .card .topleft {
+                top: .25rem;
+                left: .25rem;
+                -webkit-transform: translate(-50%,0);
+                -moz-transform: translate(-50%,0);
+                -o-transform: translate(-50%,0);
+                -ms-transform: translate(-50%,0);
+                transform: translate(-50%,0);
+            }
+
+            .card .bottomright {
+                bottom: .25rem;
+                right: .25rem;
+                -webkit-transform: rotate(180deg) translate(-50%,0);
+                -moz-transform: rotate(180deg) translate(-50%,0);
+                -o-transform: rotate(180deg) translate(-50%,0);
+                -ms-transform: rotate(180deg) translate(-50%,0);
+                transform: rotate(180deg) translate(-50%,0);
+            }
+
+            .card .face {
+                height: 100%;
+                background-position: 50% 50%;
+                -webkit-background-size: 100% 100%;
+                -moz-background-size: 100% 100%;
+                background-size: 100% 100%;
+                background-repeat: no-repeat;
+            }
+
+            .card.joker .topleft, .card.joker .bottomright {
+                font-size: .4rem;
+            }
+
+            .card.spades, .card.clubs, .card.joker {
+                color: #000;
+            }
+
+            .card.hearts, .card.diamonds, .card.joker3 {
+                color: #f00;
+            }
+
+            .card.spades1 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_1.svg");
+            }
+
+            .card.spades2 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_2.svg");
+            }
+
+            .card.spades3 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_3.svg");
+            }
+
+            .card.spades4 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_4.svg");
+            }
+
+            .card.spades5 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_5.svg");
+            }
+
+            .card.spades6 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_6.svg");
+            }
+
+            .card.spades7 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_7.svg");
+            }
+
+            .card.spades8 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_8.svg");
+            }
+
+            .card.spades9 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_9.svg");
+            }
+
+            .card.spades10 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_10.svg");
+            }
+
+            .card.spades11 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_11.svg");
+            }
+
+            .card.spades12 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_12.svg");
+            }
+
+            .card.spades13 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/0_13.svg");
+            }
+
+            .card.hearts1 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_1.svg");
+            }
+
+            .card.hearts2 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_2.svg");
+            }
+
+            .card.hearts3 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_3.svg");
+            }
+
+            .card.hearts4 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_4.svg");
+            }
+
+            .card.hearts5 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_5.svg");
+            }
+
+            .card.hearts6 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_6.svg");
+            }
+
+            .card.hearts7 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_7.svg");
+            }
+
+            .card.hearts8 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_8.svg");
+            }
+
+            .card.hearts9 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_9.svg");
+            }
+
+            .card.hearts10 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_10.svg");
+            }
+
+            .card.hearts11 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_11.svg");
+            }
+
+            .card.hearts12 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_12.svg");
+            }
+
+            .card.hearts13 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/1_13.svg");
+            }
+
+            .card.clubs1 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_1.svg");
+            }
+
+            .card.clubs2 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_2.svg");
+            }
+
+            .card.clubs3 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_3.svg");
+            }
+
+            .card.clubs4 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_4.svg");
+            }
+
+            .card.clubs5 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_5.svg");
+            }
+
+            .card.clubs6 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_6.svg");
+            }
+
+            .card.clubs7 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_7.svg");
+            }
+
+            .card.clubs8 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_8.svg");
+            }
+
+            .card.clubs9 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_9.svg");
+            }
+
+            .card.clubs10 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_10.svg");
+            }
+
+            .card.clubs11 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_11.svg");
+            }
+
+            .card.clubs12 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_12.svg");
+            }
+
+            .card.clubs13 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/2_13.svg");
+            }
+
+            .card.diamonds1 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_1.svg");
+            }
+
+            .card.diamonds2 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_2.svg");
+            }
+
+            .card.diamonds3 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_3.svg");
+            }
+
+            .card.diamonds4 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_4.svg");
+            }
+
+            .card.diamonds5 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_5.svg");
+            }
+
+            .card.diamonds6 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_6.svg");
+            }
+
+            .card.diamonds7 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_7.svg");
+            }
+
+            .card.diamonds8 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_8.svg");
+            }
+
+            .card.diamonds9 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_9.svg");
+            }
+
+            .card.diamonds10 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_10.svg");
+            }
+
+            .card.diamonds11 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_11.svg");
+            }
+
+            .card.diamonds12 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_12.svg");
+            }
+
+            .card.diamonds13 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/3_13.svg");
+            }
+
+            .card.joker1 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/4_1.svg");
+            }
+
+            .card.joker2 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/4_2.svg");
+            }
+
+            .card.joker3 .face {
+                background-image: url("../../content/images/Html5GameImages/faces/4_3.svg");
+            }
+
+            .card.back .face {
+                background-image: url("../../content/images/Html5GameImages/faces/back.png");
+            }
+
+            .card.back .topleft, .card.back .bottomright {
+                display: none;
+            }
+
+        @@media (max-width:540px) {
+            #topbar;
+
+        {
+            text-align: left;
+        }
+
+        .gh-ribbon {
+            -webkit-transform: scale(.5);
+            -moz-transform: scale(.5);
+            -o-transform: scale(.5);
+            -ms-transform: scale(.5);
+            transform: scale(.5);
+            -webkit-transform-origin: 100% 0;
+            -moz-transform-origin: 100% 0;
+            -o-transform-origin: 100% 0;
+            -ms-transform-origin: 100% 0;
+            transform-origin: 100% 0;
+        }
+
+        }
+
+        @@media (min-width:800px) {
+            html {
+                font-size: 125%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>@ViewBag.Url</div>
+    <article class="htmleaf-container">
+        <div id="container"></div>
+        <div id="topbar"></div>
+    </article>
+    <script>
+        'use strict';
+
+        var Deck = (function () {
+
+            'use strict';
+
+            var style = document.createElement('p').style;
+            var memoized = {};
+
+            function prefix(param) {
+                if (typeof memoized[param] !== 'undefined') {
+                    return memoized[param];
+                }
+
+                if (typeof style[param] !== 'undefined') {
+                    memoized[param] = param;
+                    return param;
+                }
+
+                var camelCase = param[0].toUpperCase() + param.slice(1);
+                var prefixes = ['webkit', 'moz', 'Moz', 'ms', 'o'];
+                var test;
+
+                for (var i = 0, len = prefixes.length; i < len; i++) {
+                    test = prefixes[i] + camelCase;
+                    if (typeof style[test] !== 'undefined') {
+                        memoized[param] = test;
+                        return test;
+                    }
+                }
+            }
+
+            var transform = prefix('transform');
+            var $p = document.createElement('p');
+
+            document.body.appendChild($p);
+
+            $p.style[transform] = 'translate3d(1px,1px,1px)';
+
+            var has3d = $p.style[transform];
+
+            has3d = has3d != null && has3d.length && has3d !== 'none';
+
+            document.body.removeChild($p);
+
+            function translate(a, b, c) {
+                c = c || 0;
+                if (has3d) {
+                    return 'translate3d(' + a + ', ' + b + ', ' + c + ')';
+                } else {
+                    return 'translate(' + a + ', ' + b + ')';
+                }
+            }
+
+            function poker(card, $el) {
+                var transform = prefix('transform');
+                var transition = prefix('transition');
+                var transitionDelay = prefix('transitionDelay');
+
+                card.poker = function (i, person, len, cb) {
+                    var delay = i * 250;
+                    var target = {
+                        x: (i % person) * 110 - 55 * (person - 1),
+                        y: -150 + parseInt(i / person) * 10
+                    };
+
+                    setTimeout(function () {
+                        $el.style.zIndex = len - 1 + i;
+                    }, delay);
+
+                    setTimeout(function () {
+                        $el.style[transition] = 'all .25s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+                        $el.style[transform] = translate(target.x + '%', target.y + '%');
+                    }, delay + 25);
+
+                    setTimeout(function () {
+                        $el.style[transition] = '';
+                        $el.classList.add('poker');
+                        cb(i);
+                    }, delay + 250);
+                };
+            }
+
+            function openPoker(card, $el) {
+                var transform = prefix('transform');
+                var transition = prefix('transition');
+                var transitionDelay = prefix('transitionDelay');
+
+                card.openPoker = function (i, person, len, cb) {
+
+                    var delay = i * 250;
+                    var target = {
+                        x: (i % person) * 110 - 55 * (person - 1),
+                        y: -150 + parseInt(i / person) * 20
+                    };
+                    setTimeout(function () {
+                        $el.style.zIndex = len - 1 + i;
+                    }, delay);
+
+                    setTimeout(function () {
+                        $el.style[transition] = 'all .25s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+                        $el.style[transform] = translate(target.x + '%', target.y + '%');
+                    }, delay + 25);
+
+                    setTimeout(function () {
+                        $el.style[transition] = '';
+                        $el.classList.remove('back');
+                        cb(i);
+                    }, delay + 250);
+                }
+            }
+
+            function fan(card, $el) {
+                var transform = prefix('transform');
+                var transformOrigin = prefix('transformOrigin');
+                var transition = prefix('transition');
+                var transitionDelay = prefix('transitionDelay');
+
+                card.fan = function (i, len, cb) {
+                    var z = i / 4;
+                    var delay = i * 10;
+                    var rot = i / (len - 1) * 260 - 130;
+
+                    $el.style[transformOrigin] = '50% 110%';
+
+                    setTimeout(function () {
+                        $el.style[transition] = 'all .3s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+                        $el.style[transitionDelay] = delay / 1000 + 's';
+                        $el.style[transform] = translate(-z + 'px', -z + 'px');
+                        $el.style.zIndex = i;
+
+                        setTimeout(function () {
+                            $el.style[transitionDelay] = '';
+                            $el.style[transform] = translate(0, 0) + 'rotate(' + rot + 'deg)';
+                        }, 300 + delay);
+                    }, 0);
+
+                    setTimeout(function () {
+                        cb(i);
+                    }, 1000 + delay);
+                };
+            }
+
+            function bysuit(card, $el) {
+                var transform = prefix('transform');
+                var transition = prefix('transition');
+                var transitionDelay = prefix('transitionDelay');
+
+                var value = card.value;
+                var suit = card.suit;
+
+                card.bysuit = function (cb) {
+                    var i = card.i;
+                    var delay = i * 10;
+                    var posX = -(6.75 - value) * 15;
+                    var posY = -(1.5 - suit) * 105;
+
+                    setTimeout(function () {
+                        $el.style[transition] = 'all .5s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+                        $el.style[transitionDelay] = delay / 1000 + 's';
+                        $el.style[transform] = translate(posX + '%', posY + '%');
+                        $el.style.zIndex = i;
+
+                        setTimeout(function () {
+                            $el.style[transition] = '';
+                            cb(i);
+                        }, 500 + delay);
+                    }, 0);
+                };
+            }
+
+            function sort(card, $el) {
+                var transform = prefix('transform');
+                var transition = prefix('transition');
+
+                card.sort = function (n, cb, reverse) {
+                    var z = n / 4;
+                    var delay = n * 10;
+
+                    setTimeout(function () {
+                        $el.style[transition] = 'all .4s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+                        $el.style[transform] = translate(-z + 'px', '-150%');
+                    }, delay);
+
+                    setTimeout(function () {
+                        $el.style.zIndex = n;
+                    }, 200 + delay);
+
+                    setTimeout(function () {
+                        $el.style[transform] = translate(-z + 'px', -z + 'px');
+
+                        setTimeout(function () {
+                            $el.style[transition] = '';
+                            card.x = -z;
+                            card.y = -z;
+                            cb(n);
+                        }, 500);
+                    }, 400 + delay);
+                };
+            }
+
+            function plusMinus(value) {
+                var plusminus = Math.round(Math.random()) ? -1 : 1;
+
+                return plusminus * value;
+            }
+
+            function shuffle(card, $el) {
+                var transform = prefix('transform');
+                var transition = prefix('transition');
+                var transitionDelay = prefix('transitionDelay');
+
+                card.shuffle = function (cb) {
+                    var i = card.pos;
+                    var z = i / 4;
+                    var offsetX = plusMinus(Math.random() * 40 + 30);
+                    var delay = i * 2;
+
+                    $el.style[transition] = 'all .2s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+                    $el.style[transitionDelay] = delay / 1000 + 's';
+
+                    setTimeout(function () {
+                        $el.style[transform] = translate(offsetX + '%', -z + 'px');
+                    }, 0);
+
+                    setTimeout(function () {
+                        $el.style[transitionDelay] = '';
+                        $el.style.zIndex = i;
+                    }, 100 + delay);
+
+                    setTimeout(function () {
+                        $el.style[transform] = translate(-z + 'px', -z + 'px');
+
+                        setTimeout(function () {
+                            $el.style[transition] = '';
+                            $el.classList.remove('poker');
+                            $el.classList.remove('back');
+                            $el.classList.add('back');
+                            cb(i);
+                        }, 200);
+                    }, 200 + delay);
+                };
+            }
+
+            function intro(card, $el) {
+                var transform = prefix('transform');
+                var transition = prefix('transition');
+                var transitionDelay = prefix('transitionDelay');
+
+                card.intro = function (i, cb) {
+                    var delay = i * 10 + 250;
+                    var z = i / 4;
+
+                    $el.style[transform] = translate(-z + 'px', '-250%');
+                    $el.style.opacity = 0;
+                    $el.style.zIndex = i;
+
+                    setTimeout(function () {
+                        $el.style[transition] = 'all 1s cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+                        $el.style[transitionDelay] = delay / 1000 + 's';
+                        $el.style[transform] = translate(-z + 'px', -z + 'px');
+                        $el.style.opacity = 1;
+
+                        setTimeout(function () {
+                            $el.style[transition] = '';
+
+                            cb && cb(i);
+                        }, 1250 + delay);
+                    }, 500);
+                };
+            }
+
+            function createElement(type) {
+                return document.createElement(type);
+            }
+
+            var maxZ = 52;
+
+            function Card(i) {
+                var transition = prefix('transition');
+                var transform = prefix('transform');
+
+                var value = i % 13 + 1;
+                var name = value === 1 ? 'A' : value === 11 ? 'J' : value === 12 ? 'Q' : value === 13 ? 'K' : value;
+                var suit = i / 13 | 0;
+                var suitName = SuitName(suit);
+                var z = (52 - i) / 4;
+
+                var $el = createElement('div');
+                var $topleft = createElement('div');
+                var $bottomright = createElement('div');
+                var $face = createElement('div');
+
+                var isMovable = true;
+
+                var self = { i: i, value: value, suit: suit, pos: i, $el: $el, mount: mount, unmount: unmount };
+
+                $el.classList.add('card', 'back', suitName, suitName + value);
+                $topleft.classList.add('topleft');
+                $bottomright.classList.add('bottomright');
+                $face.classList.add('face');
+
+                $topleft.textContent = suit < 4 ? name : 'J\nO\nK\nE\nR';
+                $bottomright.textContent = suit < 4 ? name : 'J\nO\nK\nE\nR';
+
+                $el.style.zIndex = 52 - i;
+                $el.style[transform] = 'translate(-' + z + 'px, -' + z + 'px)';
+
+                $el.appendChild($face);
+                $el.appendChild($topleft);
+                $el.appendChild($bottomright);
+
+                intro(self, $el);
+                shuffle(self, $el);
+                sort(self, $el);
+                bysuit(self, $el);
+                fan(self, $el);
+                poker(self, $el);
+                openPoker(self, $el);
+
+                self.enableMoving = function () {
+                    if (isMovable) {
+                        // Already is movable, do nothing
+                        return;
+                    }
+                    $el.style.cursor = 'move';
+                    addListener($el, 'mousedown', onMousedown);
+                    addListener($el, 'touchstart', onMousedown);
+                };
+
+                self.disableMoving = function () {
+                    if (!isMovable) {
+                        // Already disabled moving, do nothing
+                        return;
+                    }
+                    $el.style.cursor = '';
+                    removeListener($el, 'mousedown', onMousedown);
+                    removeListener($el, 'touchstart', onMousedown);
+                };
+
+                return self;
+
+                function onMousedown(e) {
+                    var middlePoint = self.$root.getBoundingClientRect();
+                    var pos = {};
+
+                    e.preventDefault();
+
+                    if (e.type === 'mousedown') {
+                        pos.x = e.clientX;
+                        pos.y = e.clientY;
+                        addListener(window, 'mousemove', onMousemove);
+                        addListener(window, 'mouseup', onMouseup);
+                    } else {
+                        pos.x = e.touches[0].clientX;
+                        pos.y = e.touches[0].clientY;
+                        addListener(window, 'touchmove', onMousemove);
+                        addListener(window, 'touchend', onMouseup);
+                    }
+
+                    $el.style[transition] = 'all .2s cubic-bezier(0.215, 0.610, 0.355, 1.000)';
+                    $el.style[transform] = translate(pos.x - middlePoint.left + 'px', pos.y - middlePoint.top + 'px');
+                    $el.style.zIndex = maxZ++;
+
+                    function onMousemove(e) {
+                        var pos = {};
+
+                        if (e.type === 'mousemove') {
+                            pos.x = e.clientX;
+                            pos.y = e.clientY;
+                        } else {
+                            pos.x = e.touches[0].clientX;
+                            pos.y = e.touches[0].clientY;
+                        }
+
+                        $el.style[transition] = '';
+                        $el.style[transform] = translate(pos.x - middlePoint.left + 'px', pos.y - middlePoint.top + 'px');
+                    }
+
+                    function onMouseup(e) {
+                        if (e.type === 'mouseup') {
+                            removeListener(window, 'mousemove', onMousemove);
+                            removeListener(window, 'mouseup', onMouseup);
+                        } else {
+                            removeListener(window, 'touchmove', onMousemove);
+                            removeListener(window, 'touchend', onMouseup);
+                        }
+                    }
+                }
+
+                function mount(target) {
+                    target.appendChild($el);
+
+                    self.$root = target;
+                }
+
+                function unmount() {
+                    self.$root && self.$root.removeChild($el);
+                    self.$root = null;
+                }
+            }
+
+            function SuitName(value) {
+                return value === 0 ? 'spades' : value === 1 ? 'hearts' : value === 2 ? 'clubs' : value === 3 ? 'diamonds' : 'joker';
+            }
+
+            function addListener(target, name, listener) {
+                target.addEventListener(name, listener);
+            }
+
+            function removeListener(target, name, listener) {
+                target.removeEventListener(name, listener);
+            }
+
+            function easing(name) {
+                if (name === 'cubicInOut') {
+                    return 'cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+                }
+            }
+
+            function introModule(deck) {
+                deck.intro = deck.queued(intro);
+
+                function intro(next) {
+                    var cards = deck.cards;
+
+                    cards.forEach(function (card, i) {
+                        card.intro(i, function (i) {
+                            if (i === cards.length - 1) {
+                                next();
+                            }
+                        });
+                    });
+                }
+            }
+
+            function bysuitModule(deck) {
+                deck.bysuit = deck.queued(bysuit);
+
+                function bysuit(next) {
+                    var cards = deck.cards;
+
+                    cards.forEach(function (card) {
+                        card.bysuit(function (i) {
+                            if (i === cards.length - 1) {
+                                next();
+                            }
+                        });
+                    });
+                }
+            }
+
+            function pokerModule(deck) {
+                deck.poker = deck.queued(poker);
+
+                function poker(next) {
+                    var cards = deck.cards;
+                    var len = cards.length;
+                    var person = document.getElementById('person').value;
+
+                    cards.slice(-5 * person).reverse().forEach(function (card, i) {
+                        card.poker(i, person, len, function (i) {
+                            if (i === 4) {
+                                next();
+                            }
+                        });
+                    });
+                }
+            }
+
+            function openPokerModule(deck) {
+                deck.openPoker = deck.queued(openPoker);
+
+                function openPoker(next) {
+                    var cards = deck.cards;
+                    var len = cards.length;
+                    var person = document.getElementById('person').value;
+
+                    cards.slice(-5 * person).reverse().forEach(function (card, i) {
+                        card.openPoker(i, person, len, function (i) {
+                            if (i === 4) {
+                                next();
+                            }
+                        });
+                    });
+                }
+            }
+
+            function fanModule(deck) {
+                deck.fan = deck.queued(fan);
+
+                function fan(next) {
+                    var cards = deck.cards;
+                    var len = cards.length;
+
+                    cards.forEach(function (card, i) {
+                        card.fan(i, len, function (i) {
+                            if (i === cards.length - 1) {
+                                next();
+                            }
+                        });
+                    });
+                }
+            }
+
+            function sortModule(deck) {
+                deck.sort = deck.queued(sort);
+
+                function sort(next, reverse) {
+                    var cards = deck.cards;
+
+                    cards.sort(function (a, b) {
+                        if (reverse) {
+                            return a.i - b.i;
+                        } else {
+                            return b.i - a.i;
+                        }
+                    });
+
+                    cards.forEach(function (card, i) {
+                        card.sort(i, function (i) {
+                            if (i === cards.length - 1) {
+                                next();
+                            }
+                        }, reverse);
+                    });
+                }
+            }
+
+            function fisherYates(array) {
+                var rnd, temp;
+
+                for (var i = array.length - 1; i; i--) {
+                    rnd = Math.random() * i | 0;
+                    temp = array[i];
+                    array[i] = array[rnd];
+                    array[rnd] = temp;
+                }
+
+                return array;
+            }
+
+            function shuffleModule(deck) {
+
+                deck.shuffle = deck.queued(shuffle);
+
+                function shuffle(next) {
+                    var cards = deck.cards;
+
+                    fisherYates(cards);
+
+                    cards.forEach(function (card, i) {
+                        card.pos = i;
+
+                        card.shuffle(function (i) {
+                            if (i === cards.length - 1) {
+                                next();
+                            }
+                        });
+                    });
+                    return;
+                }
+            }
+
+            function queue(target) {
+                var array = Array.prototype;
+
+                var queueing = [];
+
+                target.queue = queue;
+                target.queued = queued;
+
+                return target;
+
+                function queued(action) {
+                    return function () {
+                        var self = this;
+                        var args = arguments;
+
+                        queue(function (next) {
+                            action.apply(self, array.concat.apply(next, args));
+                        });
+                    };
+                }
+
+                function queue(action) {
+                    if (!action) {
+                        return;
+                    }
+
+                    queueing.push(action);
+
+                    if (queueing.length === 1) {
+                        next();
+                    }
+                }
+
+                function next() {
+                    queueing[0](function (err) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        queueing = queueing.slice(1);
+
+                        if (queueing.length) {
+                            next();
+                        }
+                    });
+                }
+            }
+
+            function observable(target) {
+                target || (target = {});
+                var listeners = {};
+
+                target.on = on;
+                target.one = one;
+                target.off = off;
+                target.trigger = trigger;
+
+                return target;
+
+                function on(name, cb, ctx) {
+                    listeners[name] || (listeners[name] = []);
+                    listeners[name].push({ cb: cb, ctx: ctx });
+                }
+
+                function one(name, cb, ctx) {
+                    listeners[name] || (listeners[name] = []);
+                    listeners[name].push({
+                        cb: cb, ctx: ctx, once: true
+                    });
+                }
+
+                function trigger(name) {
+                    var self = this;
+                    var args = Array.prototype.slice(arguments, 1);
+
+                    var currentListeners = listeners[name] || [];
+
+                    currentListeners.filter(function (listener) {
+                        listener.cb.apply(self, args);
+
+                        return !listener.once;
+                    });
+                }
+
+                function off(name, cb) {
+                    if (!name) {
+                        listeners = {};
+                        return;
+                    }
+
+                    if (!cb) {
+                        listeners[name] = [];
+                        return;
+                    }
+
+                    listeners[name] = listeners[name].filter(function (listener) {
+                        return listener.cb !== cb;
+                    });
+                }
+            }
+
+            function Deck(jokers) {
+                var cards = new Array(jokers ? 55 : 52);
+
+                var $el = createElement('div');
+                var self = observable({ mount: mount, unmount: unmount, cards: cards, $el: $el });
+                var $root;
+
+                queue(self);
+                shuffleModule(self);
+                sortModule(self);
+                fanModule(self);
+                pokerModule(self);
+                openPokerModule(self);
+                bysuitModule(self);
+                introModule(self);
+
+                $el.classList.add('deck');
+
+                var card;
+
+                for (var i = 0, len = cards.length; i < len; i++) {
+                    card = cards[i] = Card(i);
+                    card.mount($el);
+                }
+
+                return self;
+
+                function mount(root) {
+                    $root = root;
+                    $root.appendChild($el);
+                }
+
+                function unmount() {
+                    $root.removeChild($el);
+                }
+            }
+
+            Deck.Card = Card;
+            Deck.easing = easing;
+            Deck.prefix = prefix;
+            Deck.translate = translate;
+
+            return Deck;
+        })();
+    </script>
+    <script>
+        var easing = Deck.easing
+        var prefix = Deck.prefix
+
+        var transform = prefix('transform')
+        var transition = prefix('transition')
+        var transitionDelay = prefix('transitionDelay')
+        var boxShadow = prefix('boxShadow')
+
+        var translate = Deck.translate
+
+        var $container = document.getElementById('container')
+        var $topbar = document.getElementById('topbar')
+
+        var $person = document.createElement('input')
+
+        var $sort = document.createElement('button')
+        var $shuffle = document.createElement('button')
+        var $bysuit = document.createElement('button')
+        var $fan = document.createElement('button')
+        var $poker = document.createElement('button')
+        var $open = document.createElement('button')
+
+        $person.id = 'person';
+        $person.value = '5';
+
+        $shuffle.textContent = 'Shuffle'
+        $sort.textContent = 'Sort'
+        $bysuit.textContent = 'By suit'
+        $fan.textContent = 'Fan'
+        $poker.textContent = 'Poker'
+        $open.textContent = 'Open'
+
+        $topbar.appendChild($person);
+        $topbar.appendChild($shuffle)
+        $topbar.appendChild($sort)
+        $topbar.appendChild($bysuit)
+        $topbar.appendChild($fan)
+        $topbar.appendChild($poker)
+        $topbar.appendChild($open)
+
+        var deck = Deck('joker')
+
+        // easter eggs start
+
+        var acesClicked = []
+        var kingsClicked = []
+
+        deck.cards.forEach(function (card, i) {
+            card.enableMoving()
+
+            card.$el.addEventListener('mousedown', onTouch)
+            card.$el.addEventListener('touchstart', onTouch)
+
+            function onTouch() {
+                var card
+
+                if (i % 13 === 0) {
+                    acesClicked[i] = true
+                    if (acesClicked.filter(function (ace) {
+                      return ace
+                    }).length === 4) {
+                        document.body.removeChild($topbar)
+                        deck.$el.style.display = 'none'
+                        setTimeout(function () {
+                            startWinning()
+                        }, 250)
+                    }
+                } else if (i % 13 === 12) {
+                    if (!kingsClicked) {
+                        return
+                    }
+                    kingsClicked[i] = true
+                    if (kingsClicked.filter(function (king) {
+                      return king
+                    }).length === 4) {
+                        for (var j = 0; j < 3; j++) {
+                            card = Deck.Card(52 + j)
+                            card.mount(deck.$el)
+                            card.$el.style[transform] = 'scale(0)'
+                            card.enableMoving()
+                            deck.cards.push(card)
+                        }
+                        deck.sort(true)
+                        kingsClicked = false
+                    }
+                } else {
+                    acesClicked = []
+                    kingsClicked = []
+                }
+            }
+        })
+
+        function startWinning() {
+            var $winningDeck = document.createElement('div')
+            $winningDeck.classList.add('deck')
+
+            $winningDeck.style[transform] = translate(Math.random() * window.innerWidth - window.innerWidth / 2 + 'px', Math.random() * window.innerHeight - window.innerHeight / 2 + 'px')
+
+            $container.appendChild($winningDeck)
+
+            for (var i = 0; i < Deck.maxZ; i++) {
+                addWinningCard($winningDeck, i)
+            }
+
+            setTimeout(startWinning, 500)
+        }
+
+        function addWinningCard($deck, i) {
+            var card = Deck.Card(i)
+            var delay = (Deck.maxZ - i) * 20
+
+            var $xMovement = document.createElement('div')
+            $xMovement.style.position = 'absolute'
+            $xMovement.style[transform] = translate(0, 0)
+
+            card.$el.style[boxShadow] = 'none'
+
+            card.mount($xMovement)
+            $deck.appendChild($xMovement)
+
+            card.$el.style[transform] = translate(0, 0)
+
+            setTimeout(function () {
+                $xMovement.style[transition] = 'all 1s linear'
+                $xMovement.style[transitionDelay] = delay / 1000 + 's'
+
+                card.$el.style[transition] = 'all 1s ' + easing('cubicInOut')
+                card.$el.style[transitionDelay] = delay / 1000 + 's'
+
+                $xMovement.style[transform] = translate('-500px', 0)
+                card.$el.style[transform] = translate(0, '500px')
+            }, 0)
+            setTimeout(function () {
+                card.unmount()
+            }, 1000 + delay)
+        }
+
+
+        // easter eggs end
+
+
+        $shuffle.addEventListener('click', function () {
+            deck.shuffle()
+            deck.shuffle()
+        })
+        $sort.addEventListener('click', function () {
+            deck.sort()
+        })
+        $bysuit.addEventListener('click', function () {
+            deck.sort(true) // sort reversed
+            deck.bysuit()
+        })
+        $fan.addEventListener('click', function () {
+            deck.fan()
+        })
+        $poker.addEventListener('click', function () {
+            deck.shuffle()
+            deck.shuffle()
+            deck.shuffle()
+            deck.poker()
+        })
+        $open.addEventListener('click', function () {
+            deck.openPoker()
+        })
+        deck.mount($container)
+
+        deck.intro()
+        deck.sort()
+
+
+        // secret message..
+
+
+        var randomDelay = 10000 + 60000 * Math.random()
+
+        setTimeout(function () {
+            printMessage('Psst..I want to share a secret with you...')
+        }, randomDelay)
+
+        setTimeout(function () {
+            printMessage('...try clicking all kings and nothing in between...')
+        }, randomDelay + 5000)
+
+        setTimeout(function () {
+            printMessage('...have fun ;)')
+        }, randomDelay + 10000)
+
+        function printMessage(text) {
+            var $message = document.createElement('p')
+            $message.classList.add('message')
+            $message.textContent = text
+
+            document.body.appendChild($message)
+
+            $message.style[transform] = translate(window.innerWidth + 'px', 0)
+
+            setTimeout(function () {
+                $message.style[transition] = 'all .7s ' + easing('cubicInOut')
+                $message.style[transform] = translate(0, 0)
+            }, 1000)
+
+            setTimeout(function () {
+                $message.style[transform] = translate(-window.innerWidth + 'px', 0)
+            }, 6000)
+
+            setTimeout(function () {
+                document.body.removeChild($message)
+            }, 7000)
+        }
+    </script>
+</body>
+</html>

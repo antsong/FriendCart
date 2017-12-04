@@ -1,0 +1,113 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+@{
+    Layout = "_LoginLayout.cshtml";
+    ViewBag.Title = "登录/注册";
+}
+<div class="well col-md-6 col-md-offset-3" id="login">
+    <form action="~/mz-login" method="post" role="form">
+        @if (Model != null && Model.Length > 0)
+        {
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach (var err in Model)
+                    {
+                        <li>@err</li>
+                    }
+                </ul>
+            </div>
+        }
+        <div class="form-group">
+            <input type="email" class="form-control" name="Email" placeholder="Email" required />
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control" name="Password" placeholder="密码" required />
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="Remember" id="Remember"> 记住密码？
+            </label>
+            @*<a href="/mz-register" class="pull-right">还没有帐号，去注册！</a>*@
+            <a href="javascript:" id="goregister" class="pull-right">还没有帐号，去注册！</a>
+        </div>
+        <input type="hidden" name="ReturnUrl" value="@Nancy.Helpers.HttpUtility.HtmlEncode(ViewBag.ReturnUrl.Value)" />
+        <button type="submit" class="btn btn-primary btn-block">
+            <span class="glyphicon glyphicon-user"></span>登录
+        </button>
+    </form>
+</div>
+
+
+<div class="well col-md-6 col-md-offset-3" id="register" style="display:none;">
+
+    <form action="~/mz-register" method="post" role="form" class="form-horizontal">
+        @if (Model != null && Model.Length > 0)
+        {
+            <div class="alert alert-dismissible alert-warning">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <ul>
+                    @foreach (var err in Model)
+                    {
+                        <li>@err</li>
+                    }
+                </ul>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="email" class="form-control" name="Email" placeholder="注册邮箱" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="password" class="form-control" name="Password" placeholder="密码" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="password" class="form-control" name="PasswordConfirm" placeholder="密码确认" required />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-4">
+                <input type="text" class="form-control " name="Code" id="Code" placeholder="验证码" required />
+            </div>
+            <div class="col-md-8">
+                <script>
+                    function changeCode(img) {
+                        img.src = "mz-code?t=" + new Date().getTime();
+                        $("#Code").val("");
+                    }
+                </script>
+                @*<img class="code" onclick="changeCode(this)" src="https://passport.baidu.com/cgi-bin/genimage?jxIcaptchaservice383231395351496852386a2f7546553156556778705475337477476373774d69514150792f742f7366676b70472f68706173333579666d556b4a774e337748654859626c484562596c5242383974515239757a45775268496f4a6a4a526c324d7437797a6155486f6b47336a7770496b4c2b366e4f70444c5846645a39715943394944527a586d62544b493758613577596270617444747a59594a485777684e64524a4a6173486a31302f6e6b4a416f3836463769703633766e6950315a5878596c366e3479486c366c474a6861513146526b47773637474c71674a4b4d63385467747137504c64544c6c724e526733754851454d3165324756544c424c46326a2b4a63355a573779744362477939314438597a4f6a65366b3172667a5964622b79676d6b4558466439745947784b69484c3548307858424345696b586c4d705979754f58305a5231784d57" height="34" width="85" />*@
+                <img class="code" onclick="changeCode(this)" src="mz-code" height="34" width="85" />
+                <a href="javascript:void(0)" onclick="$('.code')[0].click()">换一张</a>
+                @*<a href="/mz-login">直接登录？</a>*@
+                <a href="javascript:" id="gologin">直接登录？</a>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-block">
+                    <span class="glyphicon glyphicon-user"></span>注册
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section PostScripts{
+    <script>
+        $(function () {
+            $("#goregister").bind("click", function () {
+                $("#login").hide("speed");
+                $("#register").show("speed");
+            })
+
+            $("#gologin").bind("click", function () {
+                $("#register").hide("speed");
+                $("#login").show("speed");
+            })
+        });
+    </script>
+}

@@ -1,0 +1,281 @@
+﻿@import "../bootstrap/bootstrap";
+
+body {
+    font-family: "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+.navbar {
+    border-radius: 0;
+    border: none;
+    background-color: rgba(32, 32, 32, 0.8);
+    margin-bottom: 0;
+}
+.navbar-img {
+    padding-top:7px;
+    padding-bottom:7px;
+}
+.navbar-default .navbar-brand,
+.navbar-default .navbar-nav > li > a {
+    color: #dfdfdf;
+}
+
+    .navbar-default .navbar-brand:hover,
+    .navbar-default .navbar-nav > li > a:hover {
+        color: #fff;
+    }
+
+#main {
+    padding-top: 15px;
+}
+
+#img-ymz {
+    max-width: 130px;
+}
+
+.panel-default {
+    border-color: #ededed;
+}
+
+    .panel-default .panel-heading {
+        background-color: #f9f9f9;
+        border-bottom-color: #ededed;
+    }
+
+    .panel-default .panel-title {
+        font-weight: normal;
+    }
+
+        .panel-default .panel-title a {
+            color: #428bca;
+        }
+
+.panel-meta {
+    color: gray;
+    padding: 10px 20px 0 0;
+    margin: 0 0 -10px 0;
+}
+
+.panel-body {
+    line-height: 180%;
+    font-size: 110%;
+}
+
+    .panel-body p {
+        text-indent: 2em;
+    }
+
+    .panel-body img {
+        max-width: 100%;
+        height: auto;
+    }
+
+.panel-footer {
+    border-top-color: #ededed;
+    background-color: #fcfcfc;
+}
+
+    .panel-footer .glyphicon,
+    .panel-heading .glyphicon {
+        margin-right: 5px;
+    }
+
+#comments-caption {
+    padding: 10px;
+    background-color: #fdfdfd;
+    margin-left: 1px;
+    margin-right: 1px;
+    border-radius: 4px 4px 0 0;
+}
+
+.copyright {
+    padding: 5px;
+    font-size: 96%;
+    line-height: 30px;
+}
+
+    .copyright img.creativecommons {
+        border-width: 0;
+        margin-top: 0;
+        margin-right: 5px;
+        text-align: left;
+        height: 30px;
+    }
+
+.sidebar {
+    padding-top: 0;
+    padding-left: 0;
+}
+
+footer {
+    padding-top: 10px;
+    margin-top: 20px;
+}
+
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00 !important;
+    background-color: #fee !important;
+}
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.validation-summary-errors {
+    margin-bottom: 20px;
+    padding: 8px;
+    border: 1px solid #fbeed5;
+    border-color: #eed3d7;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background-color: #FDDDC4;
+    color: #b94a48;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-weight: bold;
+    font-size: 12px;
+}
+
+    .validation-summary-errors ul {
+        margin: 5px;
+        padding: 0;
+    }
+
+        .validation-summary-errors ul li {
+            list-style: none;
+            margin: 5px 0 0;
+            padding: 5px 10px;
+            min-width: 214px;
+            border: 1px dashed #ddd;
+            background-color: #fff;
+            font-style: italic;
+        }
+
+.validation-summary-valid {
+    display: none;
+}
+
+
+/* Styles for Code
+-----------------------------------------------------------*/
+.zh-backtotop {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    z-index: 19;
+    margin-left: 580px;
+}
+
+    .zh-backtotop .btn-action {
+        display: block;
+        width: 38px;
+        height: 38px;
+        background-color: #ddd;
+        border-radius: 3px;
+        border: 0;
+        cursor: pointer;
+        position: relative;
+    }
+
+        .zh-backtotop .btn-action:hover {
+            background-color: rgba(32,32,32,.2);
+        }
+
+    .zh-backtotop .arrow {
+        width: 0;
+        height: 0;
+        top: -1px;
+        border: 9px solid transparent;
+        border-bottom-color: #aaa;
+    }
+
+    .zh-backtotop .stick {
+        width: 8px;
+        height: 14px;
+        top: 15px;
+        border-radius: 1px;
+        background-color: #aaa;
+    }
+
+    .zh-backtotop div {
+        position: absolute;
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+
+
+.code {
+    background: url(https://ss0.bdstatic.com/5LMZfyabBhJ3otebn9fN2DJv/passApi/img/loading_ed5e4a40.gif) #fff center center no-repeat;
+    cursor: pointer;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+    height: 11px;
+    width: 10px;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAADklEQVQIW2NgQAXGZHAAGioAza6+Hk0AAAAASUVORK5CYII=);
+}
+
+::-webkit-scrollbar-button {
+    height: 0;
+    width: 0;
+}
+
+    ::-webkit-scrollbar-button:start:decrement, ::-webkit-scrollbar-button:end:increment {
+        display: block;
+    }
+
+    ::-webkit-scrollbar-button:vertical:start:increment, ::-webkit-scrollbar-button:vertical:end:decrement {
+        display: none;
+    }
+
+::-webkit-scrollbar-track:vertical, ::-webkit-scrollbar-track:horizontal, ::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal, ::-webkit-scrollbar-track:vertical, ::-webkit-scrollbar-track:horizontal,
+::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal {
+    border-style: solid;
+    border-color: transparent;
+}
+
+    ::-webkit-scrollbar-track:vertical::-webkit-scrollbar-track:horizontal {
+        background-clip: padding-box;
+        background-color: #fff;
+    }
+
+::-webkit-scrollbar-thumb {
+    padding-top: 100px;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1),inset -1px -1px 0 rgba(0,0,0,0.07);
+    background-clip: padding-box;
+    background-color: #dadada;
+    min-height: 28px;
+    border-radius: 4px;
+}
+
+    ::-webkit-scrollbar-thumb:hover {
+        -webkit-box-shadow: inset 1px 1px 1px rgba(0,0,0,0.25);
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    ::-webkit-scrollbar-thumb:active {
+        -webkit-box-shadow: inset 1px 1px 3px rgba(0,0,0,0.35);
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    ::-webkit-scrollbar-track:vertical, ::-webkit-scrollbar-track:horizontal, ::-webkit-scrollbar-thumb:vertical, ::-webkit-scrollbar-thumb:horizontal {
+        border-width: 0;
+    }
+
+::-webkit-scrollbar-track:hover {
+    -webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}
+
+::-webkit-scrollbar-track:active {
+    -webkit-box-shadow: inset 0 0 0 rgba(0,0,0,0),inset -1px -1px 0 rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+}

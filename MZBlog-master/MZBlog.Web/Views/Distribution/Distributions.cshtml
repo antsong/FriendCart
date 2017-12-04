@@ -1,0 +1,120 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<dynamic>
+@{
+    Layout = "_AdminLayout.cshtml";
+    ViewBag.Title = "手工配送查询";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li class="active"><i class="fa fa-list"></i> 企业管理</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="well col-md-12">
+        <form class="form-inline" action="~/mz-admin/distributions/search" method="post" role="form">
+            <div class="form-group form-inline">
+                <label class="control-label" for="PlateNum">车牌号：</label>
+                <input type="text" class="form-control" style="width: 100px;" name="PlateNum" id="PlateNum" />
+            </div>
+            <div class="form-group form-inline">
+                <label class="control-label" for="TaxNum">缴税通知单号：</label>
+                <input type="text" class="form-control" name="TaxNum" id="TaxNum" />
+            </div>
+            <div class="form-group form-inline">
+                <label class="control-label" for="PersonName" >被保险人：</label>
+                <input type="text" class="form-control" style="width: 80px;" name="PersonName" id="PersonName" />
+            </div>
+            <div class="form-group form-inline">
+                <label class="control-label" for="StartTime">起保时间：</label>
+                <input class="Wdate form-control" name="StartTime" id="StartTime" type="text"
+                       onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"
+                       style="height: 34px; padding: 6px 12px; font-size: 14px; line-height: 1.42857143;"/>
+                <label class="control-label" for="StartTime">~</label>
+                <input class="Wdate form-control" name="EndTime" id="EndTime" type="text"
+                       onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"
+                       style="height: 34px;padding: 6px 12px;font-size: 14px;line-height: 1.42857143;" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-danger">
+                查询
+            </button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <table class="table table-bordered table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>车牌号</th>
+                <th>缴税通知单号</th>
+                <th>被保险人</th>
+                <th>联系电话</th>
+                <th>起保日期</th>
+                <th>交强险</th>
+                <th>商业险</th>
+                <th>车船税</th>
+                <th>合计</th>
+                <th>送单地址</th>
+                <th>配送要求</th>
+                <th>客户经理</th>
+                <th>类型</th>
+                <th class="text-center" style="width:92px;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int i = 0;
+                foreach (var dist in Model.Distributions)
+                {
+                    i++;
+                    <tr>
+                        <td>
+                            @dist.PlateNum
+                        </td>
+                        <td>@dist.TaxNum</td>
+                        <td>@dist.PersonName</td>
+                        <td>@dist.Phone</td>
+                        <td>@dist.StartTime</td>
+                        <td>@dist.StrongInsurance</td>
+                        <td>@dist.CommercialInsurance</td>
+                        <td>@dist.Tax</td>
+                        <td>@dist.Total</td>
+                        <td>@dist.Address</td>
+                        <td>@dist.Description</td>
+                        <td>@ViewBag.CurrentUser.Value.DisplayName</td>
+                        <td>@dist.TypeDescript</td>
+                        <td>
+                            <a href="~/mz-admin/distribution/edit/@dist.Id" class="btn btn-default btn-xs">修改</a>
+                            <a href="~/mz-admin/distribution/print/@dist.Id" class="btn btn-danger btn-xs">打印</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+    <ul class="pager">
+
+        @if (Model.HasPrevPage)
+        {
+            <li class="previous">
+                @if (Model.Page == 2)
+                {
+                    <a href="~/mz-admin/distributions/" title="较新的">上一页<i class="glyphicon glyphicon-arrow-left"></i></a>
+                }
+                else
+                {
+                    <a href="~/mz-admin/distributions/@(Model.Page - 1)" title="较新的">上一页<i class="glyphicon glyphicon-arrow-left"></i></a>
+                }
+            </li>
+        }
+        @if (Model.HasNextPage)
+        {
+            <li class="next">
+                <a href="~/mz-admin/distributions/@(Model.Page + 1)" title="较旧的">下一页<i class="glyphicon glyphicon-arrow-right"></i></a>
+            </li>
+        }
+    </ul>
+
+</div>
+@section PostScripts{
+    <script src="~/scripts/My97DatePicker/WdatePicker.js"></script>
+}
