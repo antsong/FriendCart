@@ -24,7 +24,7 @@ namespace MZBlog.Web.Modules
             Get["/mz-admin/change-profile"] = _ => ChangeProfile();
             Post["/mz-admin/change-profile"] = _ => ChangeProfile(this.BindAndValidate<ChangeProfileCommand>());
 
-            Get["/ant/reset-password"] = _ => ResetPassword(_.id);
+            Get["/ant/reset-password/{id}"] = _ => ResetPassword(_.id);
         }
 
         private dynamic ChangePassword()
