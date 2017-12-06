@@ -7,7 +7,7 @@ namespace MZBlog.Core.Commands.Accounts
 {
     public class LoginCommand
     {
-        [Required(ErrorMessage="Email是必须的")]
+        [Required(ErrorMessage = "Email是必须的")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "密码是必须的")]
@@ -16,6 +16,8 @@ namespace MZBlog.Core.Commands.Accounts
         public string ReturnUrl { get; set; }
 
         public bool Remember { get; set; }
+
+        public string Code { get; set; }
 
     }
 

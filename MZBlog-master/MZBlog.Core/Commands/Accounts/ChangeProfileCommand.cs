@@ -10,6 +10,8 @@ namespace MZBlog.Core.Commands.Accounts
         public string NewEmail { get; set; }
 
         public string NewDisplayName { get; set; }
+
+        public string Phone { get; set; }
     }
 
     public class ChangeProfileCommandInvoker : ICommandInvoker<ChangeProfileCommand, CommandResult>
@@ -28,7 +30,7 @@ namespace MZBlog.Core.Commands.Accounts
                 return new CommandResult("用户信息不存在");
             author.DisplayName = command.NewDisplayName;
             author.Email = command.NewEmail;
-
+            author.Phone = command.Phone;
             _db.Update(DBTableNames.Authors, author);
             return CommandResult.SuccessResult;
         }

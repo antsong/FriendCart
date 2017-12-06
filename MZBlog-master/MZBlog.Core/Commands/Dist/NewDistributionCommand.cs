@@ -7,8 +7,28 @@ using System.Threading.Tasks;
 using MZBlog.Core.Documents;
 using MZBlog.Core.Extensions;
 
-namespace MZBlog.Core.Commands
+namespace MZBlog.Core.Commands.Dist
 {
+    public class DeleteDistributionCommand
+    {
+        public string Id { get; set; }
+    }
+
+    public class DeleteDistributionCommandInvoker
+    {
+        private readonly DB.AutoBox _db;
+        public DeleteDistributionCommandInvoker(DB.AutoBox db)
+        {
+            _db = db;
+        }
+
+        public CommandResult Execute(DeleteDistributionCommand command)
+        {
+            _db.Delete(DBTableNames.Authors, command.Id);
+            return CommandResult.SuccessResult;
+        }
+    }
+
     public class NewDistributionCommand
     {
         public bool Type { get; set; }

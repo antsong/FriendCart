@@ -7,12 +7,16 @@ namespace MZBlog.Core.Documents
             Id = ObjectId.NewObjectId();
         }
 
-        public string HashedPassword { get; set; }
+        public string HashedPassword;
 
-        public string Email { get; set; }
+        public string Email;
 
-        public string DisplayName { get; set; }
+        public string DisplayName;
 
-        public string[] Roles { get; set; }
+        public string Phone;
+
+        public bool Enable;
+
+        public string[] Roles;
     }
 }

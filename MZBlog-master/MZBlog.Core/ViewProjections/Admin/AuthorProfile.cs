@@ -8,6 +8,8 @@ namespace MZBlog.Core.ViewProjections.Admin
         public string DisplayName { get; set; }
 
         public string Email { get; set; }
+
+        public string Phone { get; set; }
     }
 
     public class AuthorProfileViewProjection : IViewProjection<string, AuthorProfileViewModel>
@@ -27,7 +29,8 @@ namespace MZBlog.Core.ViewProjections.Admin
             return new AuthorProfileViewModel
             {
                 DisplayName = author.DisplayName,
-                Email = author.Email
+                Email = author.Email,
+                Phone = author.Phone
             };
         }
     }

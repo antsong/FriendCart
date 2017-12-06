@@ -65,12 +65,13 @@
     <Compile Include="Cache\ICache.cs" />
     <Compile Include="Cache\RuntimeCache.cs" />
     <Compile Include="CommandResult.cs" />
+    <Compile Include="Commands\Accounts\DeleteAuthorCommand.cs" />
     <Compile Include="Commands\Accounts\ChangePasswordCommand.cs" />
     <Compile Include="Commands\Accounts\ChangeProfileCommand.cs" />
     <Compile Include="Commands\Accounts\LoginCommand.cs" />
     <Compile Include="Commands\Accounts\MessageCommand.cs" />
     <Compile Include="Commands\Accounts\RegisterCommand.cs" />
-    <Compile Include="Commands\Distribution\NewDistributionCommand.cs" />
+    <Compile Include="Commands\Dist\NewDistributionCommand.cs" />
     <Compile Include="Commands\Posts\DeleteCommentCommand.cs" />
     <Compile Include="Commands\Posts\DeletePostCommand.cs" />
     <Compile Include="Commands\Posts\NewCommentCommand.cs" />
