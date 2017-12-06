@@ -65,7 +65,7 @@ namespace MZBlog.Web.Modules
                 _cache.Add("user_id", userId);
                 _cache.Add("access_token", token);
             }
-            string resultMsg;
+            string resultMsg = string.Empty;
             try
             {
                 var mobiles = messageCommand.Phone.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty).Split(',');
@@ -80,6 +80,9 @@ namespace MZBlog.Web.Modules
                     //模板格式：['NO0003319','宝贝','超级珍贵大宝贝']
                     resultMsg = Message.SendTemplateSms("http://api.cloudmas.cn/v/1.1/sendTemplateSms", userId, token, mobiles, messageCommand.Content);
                 }
+
+                #region 写日志
+
                 var log = new Log
                 {
                     Content = string.Format("{0}在{1}发送短信返回结果{2}",
@@ -94,6 +97,9 @@ namespace MZBlog.Web.Modules
                     Content = log.Content
                 };
                 _commandInvoker.Handle<NewLogCommand, CommandResult>(command);
+
+                #endregion
+
             }
             catch (Exception ex)
             {

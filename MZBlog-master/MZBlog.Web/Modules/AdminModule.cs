@@ -23,6 +23,8 @@ namespace MZBlog.Web.Modules
 
             Get["/mz-admin/change-profile"] = _ => ChangeProfile();
             Post["/mz-admin/change-profile"] = _ => ChangeProfile(this.BindAndValidate<ChangeProfileCommand>());
+
+            Get["/ant/reset-password"] = _ => ResetPassword(_.id);
         }
 
         private dynamic ChangePassword()
@@ -81,6 +83,19 @@ namespace MZBlog.Web.Modules
             AddMessage("修改用户信息过程中发生问题", "warning");
 
             return View["ChangeProfile"];
+        }
+
+        private dynamic ResetPassword(string id)
+        {
+            var commandResult = _commandInvokerFactory.Handle<ResetPasswordCommand, CommandResult>(new ResetPasswordCommand()
+            {
+                AuthorId = id
+            });
+            if (commandResult.Success)
+            {
+                return Response.AsRedirect("~/mz-admin/tables/1");
+            }
+            return Response.AsRedirect("~/mz-admin/tables/1");
         }
 
         private dynamic Index()
