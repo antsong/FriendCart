@@ -1,5 +1,6 @@
 ﻿using MZBlog.Core;
 using MZBlog.Core.Commands;
+using MZBlog.Core.Commands.Dist;
 using MZBlog.Core.ViewProjections.Admin;
 using MZBlog.Core.ViewProjections.Dist;
 using Nancy.Extensions;
