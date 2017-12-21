@@ -1302,6 +1302,7 @@
     <Content Include="Views\Distribution\Distributions.cshtml" />
     <Content Include="Views\Distribution\Edit.cshtml" />
     <Content Include="Views\Distribution\Print.cshtml" />
+    <Content Include="Views\AdminPosts\Logs.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

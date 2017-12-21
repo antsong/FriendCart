@@ -1,0 +1,94 @@
+﻿@using System
+@using MZBlog.Core.Extensions
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<MZBlog.Core.ViewProjections.Admin.AllTablesViewModel>
+@{
+    Layout = "_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> <a href="~/mz-admin">控制面板</a> </li>
+        <li class="active"><i class="fa fa-weixin"></i> 数据管理</li>
+    </ol>
+</div>
+
+<div class="row">
+
+    @{
+        var n = 0;
+        if (Model.Page > 1)
+        {
+            n = 25 * (Model.Page - 1);
+        }
+
+        <table class="table table-bordered table-condensed table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 50px;">序号</th>
+                    <th style="width: 150px;">请求时间</th>
+                    <th>Content</th>
+                    <th class="text-center" style="width: 92px;">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var log in Model.Logs)
+                {
+                    n++;
+                    <tr>
+                        <td>
+
+                            @n
+                        </td>
+                        <td>
+                            @log.CreatedOn
+                        </td>
+                        <td>
+                            @log.Content
+                        </td>
+                        <td>
+                            <a href="~/mz-admin/log/edit/@log.Id" class="btn btn-default btn-xs disabled">编辑</a>
+                            <a href="~/mz-admin/log/delete/@log.Id" class="btn btn-danger btn-xs disabled">删除</a>
+                        </td>
+                    </tr>
+                }
+
+                @if (n == 0)
+                {
+                    <tr><td colspan="5" align="center" class="success">没有找到对应的数据！</td></tr>
+                }
+            </tbody>
+        </table>
+
+        <ul class="pager">
+
+            @if (Model.HasPrevPage)
+            {
+                <li class="previous">
+                    <a href="~/mz-admin/logs/1" title="首页"><i class="glyphicon glyphicon-fast-backward"></i></a>
+                </li>
+                <li class="previous">
+                    @if (Model.Page == 2)
+                    {
+                        <a href="~/mz-admin/logs/" title="上一页"><i class="glyphicon glyphicon-backward"></i></a>
+                    }
+                    else
+                    {
+                        <a href="~/mz-admin/logs/@(Model.Page - 1)" title="上一页"><i class="glyphicon glyphicon-backward"></i></a>
+                    }
+                </li>
+            }
+
+            <li class="text-warning"><span>@(n - 24) 至 @n 共 @Model.Total</span></li>
+
+            @if (Model.HasNextPage)
+            {
+                <li class="next">
+                    <a href="~/mz-admin/logs/@(Model.Total/25 + 1)" title="尾页"><i class="glyphicon glyphicon-fast-forward"></i></a>
+                </li>
+                <li class="next">
+                    <a href="~/mz-admin/logs/@(Model.Page + 1)" title="下一页"><i class="glyphicon glyphicon-forward"></i></a>
+                </li>
+            }
+        </ul>
+    }
+</div>

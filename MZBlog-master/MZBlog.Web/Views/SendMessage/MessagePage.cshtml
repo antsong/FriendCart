@@ -2,7 +2,7 @@
 @{
     Layout = "_LoginLayout.cshtml";
 }
-<div class="well col-md-9 col-md-offset-1" id="login">
+<div class="well col-md-12 " id="login">
     <form action="~/send-message" method="post" role="form">
         @if (Model != null && Model.Length > 0)
         {
@@ -18,7 +18,7 @@
         <div class="form-group">
             <label class="control-label" for="Phone">多个电话用逗号分隔</label>
             <textarea class="form-control" name="Phone" rows="3">13871298164,13618625064
-             </textarea>
+            </textarea>
         </div>
         <div class="form-group">
             <label class="control-label" for="Phone">模板格式：['标题','内容','详细内容']</label>
@@ -31,8 +31,11 @@
             </label>
         </div>
         <input type="hidden" name="ReturnUrl" value="@Nancy.Helpers.HttpUtility.HtmlEncode(ViewBag.ReturnUrl.Value)" />
-        <button type="submit" class="btn btn-primary btn-block">
+        <button type="submit" class="btn btn-primary col-md-5 ">
             发送<span class="glyphicon glyphicon-send"></span>
         </button>
+        <a href="~/search-message" class="btn btn-success col-md-5 col-lg-offset-2">
+            查询<span class="glyphicon glyphicon-filter"></span>
+        </a>
     </form>
 </div>

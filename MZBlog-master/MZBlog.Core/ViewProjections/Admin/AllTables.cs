@@ -21,6 +21,20 @@ namespace MZBlog.Core.ViewProjections.Admin
         public IEnumerable<Tag> Tags { get; set; }
 
         public IEnumerable<Log> Logs { get; set; }
+
+        public int Page { get; set; }
+
+        public int Total { get; set; }
+
+        public bool HasNextPage { get; set; }
+
+        public bool HasPrevPage
+        {
+            get
+            {
+                return Page > 1;
+            }
+        }
     }
 
     public class AllTablesBindingModel
@@ -53,43 +67,47 @@ namespace MZBlog.Core.ViewProjections.Admin
                          orderby p.DateUTC descending
                          select p)
                         .Skip(skip)
-                        .Take(input.Take + 1)
+                        .Take(input.Take)
                         .ToList()
                         .AsReadOnly();
 
             var authors = (from p in _db.Select<Author>("from " + DBTableNames.Authors)
                            select p)
                         .Skip(skip)
-                        .Take(input.Take + 1)
+                        .Take(input.Take)
                         .ToList()
                         .AsReadOnly();
 
             var comments = (from p in _db.Select<BlogComment>("from " + DBTableNames.BlogComments)
                             select p)
                         .Skip(skip)
-                        .Take(input.Take + 1)
+                        .Take(input.Take)
                         .ToList()
                         .AsReadOnly();
 
             var spams = (from p in _db.Select<SpamHash>("from " + DBTableNames.SpamHashes)
                          select p)
                         .Skip(skip)
-                        .Take(input.Take + 1)
+                        .Take(input.Take)
                         .ToList()
                         .AsReadOnly();
 
             var tags = (from p in _db.Select<Tag>("from " + DBTableNames.Tags)
                         select p)
                         .Skip(skip)
-                        .Take(input.Take + 1)
-                        .ToList()
-                        .AsReadOnly();
-            var logs = (from p in _db.Select<Log>("from " + DBTableNames.Logs)
-                        select p)
-                        .OrderByDescending(x => x.CreatedOn)
+                        .Take(input.Take)
                         .ToList()
                         .AsReadOnly();
 
+
+            var logs = (from p in _db.Select<Log>("from " + DBTableNames.Logs)
+                        select p)
+                .OrderByDescending(x => x.CreatedOn)
+                .Skip(skip).Take(input.Take + 1)
+                .ToList().AsReadOnly();
+
+
+            var hasNextPage = logs.Count > input.Take;
             return new AllTablesViewModel
             {
                 Authors = authors.Take(input.Take),
@@ -97,9 +115,12 @@ namespace MZBlog.Core.ViewProjections.Admin
                 Comments = comments.Take(input.Take),
                 Spams = spams.Take(input.Take),
                 Tags = tags.Take(input.Take),
-                Logs = logs
+                Logs = logs.Take(input.Take),
+                Page = input.Page,
+                Total = (from p in _db.Select<Log>("from " + DBTableNames.Logs)
+                         select p).Count(),
+                HasNextPage = hasNextPage
             };
-
         }
     }
 }

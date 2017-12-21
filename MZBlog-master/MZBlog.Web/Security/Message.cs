@@ -54,6 +54,14 @@ namespace MZBlog.Web.Security
             return Send(url, dic, token);
         }
 
+        public static string SearchSms(string url, string userId, string token)
+        {
+            var dic = new Dictionary<string, string>();
+            dic.Add("user_id", userId);
+            dic.Add("timestamp", DateTime.Now.ToString("yyyyMMddHHmmss"));
+            return Send(url, dic, token);
+        }
+
         private static string Send(string url, Dictionary<string, string> para, string token)
         {
             var Instance = new WebClient();

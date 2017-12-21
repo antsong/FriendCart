@@ -40,6 +40,20 @@ namespace MZBlog.Web.Modules
             Get["/mz-admin/char"] = _ => { return View["Char"]; };
             Get["/mz-admin/delauthor/{Id}"] = _ => DeleteAutor(_.Id);
             Get["/mz-admin/resetpwd/{Id}"] = _ => ResetPassword(_.Id);
+
+            Get["/mz-admin/logs/{page?1}"] = _ => GetLogs(_.page);
+        }
+
+        private dynamic GetLogs(int page)
+        {
+            var tables =
+                _viewProjectionFactory.Get<AllTablesBindingModel, AllTablesViewModel>(new AllTablesBindingModel()
+                {
+                    Page = page,
+                    Take = 25
+                });
+
+            return View["Logs", tables];
         }
 
         private dynamic ResetPassword(string Id)

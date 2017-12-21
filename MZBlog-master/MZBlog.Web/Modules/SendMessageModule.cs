@@ -39,6 +39,8 @@ namespace MZBlog.Web.Modules
 
             Post["/send-message"] = _ => SendMessage(this.BindAndValidate<MessageCommand>());
 
+            Get["/search-message"] = _ => SearchMessage(_.batch);
+
         }
 
         private dynamic SendMessage(MessageCommand messageCommand)
@@ -51,42 +53,22 @@ namespace MZBlog.Web.Modules
                 }
                 return View["MessagePage", new[] { "请正确输入Email和密码" }];
             }
-
-            var userId = _cache.Get<string>("user_id");
-            var token = _cache.Get<string>("access_token");
-
-            if (string.IsNullOrWhiteSpace(userId) || string.IsNullOrWhiteSpace(token))
-            {
-                var loginString = Message.ReturnLoginToken("http://api.cloudmas.cn/v/1.0/login", "whdtjtadmin", "cT9QcnBk");
-                var json = JsonConvert.DeserializeObject(loginString) as JObject;
-                var response = json.Value<JObject>("ovit_mas_ecuser_login_response");
-                userId = response.Value<string>("user_id");
-                token = response.Value<string>("access_token");
-                _cache.Add("user_id", userId);
-                _cache.Add("access_token", token);
-            }
-            string resultMsg = string.Empty;
+            var tuple = this.LoginMessage();
+            var userId = tuple.Item1;
+            var token = tuple.Item2;
+            string resultMsg;
             try
             {
                 var mobiles = messageCommand.Phone.Trim().Replace("\n", string.Empty).Replace("\r", string.Empty).Split(',');
-                if (messageCommand.Temple)
-                {
-                    //测试短信内容
-                    resultMsg = Message.SendSms("http://api.cloudmas.cn/v/1.1/sendSms", userId, token, mobiles, messageCommand.Content);
-
-                }
-                else
-                {
-                    //模板格式：['NO0003319','宝贝','超级珍贵大宝贝']
-                    resultMsg = Message.SendTemplateSms("http://api.cloudmas.cn/v/1.1/sendTemplateSms", userId, token, mobiles, messageCommand.Content);
-                }
+                resultMsg = messageCommand.Temple ?
+                    Message.SendSms("http://api.cloudmas.cn/v/1.1/sendSms", userId, token, mobiles, messageCommand.Content) :
+                    Message.SendTemplateSms("http://api.cloudmas.cn/v/1.1/sendTemplateSms", userId, token, mobiles, messageCommand.Content);
 
                 #region 写日志
 
                 var log = new Log
                 {
-                    Content = string.Format("{0}在{1}发送短信返回结果{2}",
-                    DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分ss秒"),
+                    Content = string.Format("【{0}】发送短信成功返回结果：{1}",
                     userId,
                     resultMsg)
                 };
@@ -105,8 +87,36 @@ namespace MZBlog.Web.Modules
             {
                 return View["MessagePage", new[] { ex.Message }];
             }
-            return View["MessagePage", new[] { "短信发送成功:" + resultMsg }];
+            return View["MessagePage", new[] {  resultMsg }];
         }
+
+        private dynamic SearchMessage(string batch)
+        {
+            var tuple = this.LoginMessage();
+            var userId = tuple.Item1;
+            var token = tuple.Item2;
+            var resultMsg = Message.SearchSms(" http://api.cloudmas.cn/v/2.1/querySmsSendStatus", userId, token);
+            #region 写日志
+
+            var log = new Log
+            {
+                Content = string.Format("【{0}】在查询短信，成功返回结果：{1}",
+                userId,
+                resultMsg)
+            };
+
+            var command = new NewLogCommand
+            {
+                Id = log.Id,
+                Content = log.Content
+            };
+            _commandInvoker.Handle<NewLogCommand, CommandResult>(command);
+
+            #endregion
+
+            return View["MessagePage", new[] { resultMsg }];
+        }
+
 
         public dynamic MessageMac(dynamic p)
         {
@@ -119,5 +129,31 @@ namespace MZBlog.Web.Modules
             return VerifyMac.CallMac(dic, Message.token);
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private Tuple<string, string> LoginMessage()
+        {
+            if (!string.IsNullOrEmpty(_cache.Get<string>("user_id")) &&
+                !string.IsNullOrEmpty(_cache.Get<string>("access_token")))
+            {
+                return new Tuple<string, string>(_cache.Get<string>("user_id"), _cache.Get<string>("access_token"));
+            }
+
+            var loginString = Message.ReturnLoginToken("http://api.cloudmas.cn/v/1.0/login", "whdtjtadmin", "cT9QcnBk");
+            var json = JsonConvert.DeserializeObject(loginString) as JObject;
+            if (json == null)
+            {
+                throw new Exception("LoginMessage Return is null");
+            }
+            var response = json.Value<JObject>("ovit_mas_ecuser_login_response");
+            var userId = response.Value<string>("user_id");
+            var token = response.Value<string>("access_token");
+            _cache.Add("user_id", userId);
+            _cache.Add("access_token", token);
+            return new Tuple<string, string>(userId, token);
+        }
     }
 }
