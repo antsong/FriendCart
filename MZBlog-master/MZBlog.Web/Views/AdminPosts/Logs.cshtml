@@ -24,6 +24,9 @@
         <table class="table table-bordered table-condensed table-striped">
             <thead>
                 <tr>
+                    <th>
+                        <input type="checkbox" name="id" id="selectAll">
+                    </th>
                     <th style="width: 50px;">序号</th>
                     <th style="width: 150px;">请求时间</th>
                     <th>Content</th>
@@ -36,7 +39,9 @@
                     n++;
                     <tr>
                         <td>
-
+                            <input type="checkbox" name="id" id="@log.Id" class="select">
+                        </td>
+                        <td>
                             @n
                         </td>
                         <td>
@@ -60,6 +65,10 @@
         </table>
 
         <ul class="pager">
+            @if (Model.Page == 1)
+            {
+
+            }
 
             @if (Model.HasPrevPage)
             {
@@ -77,8 +86,26 @@
                     }
                 </li>
             }
-
-            <li class="text-warning"><span>@(n - 24) 至 @n 共 @Model.Total</span></li>
+            else
+            {
+                <li class="previous disabled">
+                    <a href="#" title="首页"><i class="glyphicon glyphicon-fast-backward"></i></a>
+                </li>
+                <li class="previous disabled">
+                    <a href="#" title="上一页"><i class="glyphicon glyphicon-backward"></i></a>
+                </li>
+            }
+            <li class="text-success">
+                <span>
+                    每页<select style="border: none;">
+                        <option value="25">25</option>
+                        <option value="25">50</option>
+                        <option value="25">100</option>
+                    </select>
+                </span>
+            </li>
+            <li class="text-success"><span>第 @Model.Page 页 共 @(Model.Total / 25 + 1)页</span></li>
+            <li class="text-success"><span>@(n - 24) 至 @n 共 @Model.Total</span></li>
 
             @if (Model.HasNextPage)
             {
@@ -89,6 +116,16 @@
                     <a href="~/mz-admin/logs/@(Model.Page + 1)" title="下一页"><i class="glyphicon glyphicon-forward"></i></a>
                 </li>
             }
+            else
+            {
+                <li class="next disabled">
+                    <a href="#" title="尾页"><i class="glyphicon glyphicon-fast-forward"></i></a>
+                </li>
+                <li class="next disabled">
+                    <a href="#" title="下一页"><i class="glyphicon glyphicon-forward"></i></a>
+                </li>
+            }
+
         </ul>
     }
 </div>

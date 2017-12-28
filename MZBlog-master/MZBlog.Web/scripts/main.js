@@ -1,4 +1,14 @@
-﻿$(window).scroll(function () {
+﻿$(function () {
+    //全选组件
+    $("#selectAll").click(function () {
+        var value = $(this).prop("checked");
+        $(".select").each(function (index, s) {
+            $(s).prop({ checked: value });
+        });
+    });
+});
+
+$(window).scroll(function () {
     if ($(window).scrollTop() > $(window).height()) {//滚动条滚动，返回顶部按钮显示、隐藏
         $(".zh-backtotop").fadeIn(500);
     } else {
@@ -7,14 +17,15 @@
 });
 
 $(function () {
+    //返回顶部
     $(".btn-backtotop").click(function () {
         $('body,html').animate({ scrollTop: 0 }, 500);
     });
 
     $("#content").focus(function () {
-        $(this).animate({ width: '360px' }, 500);// 是 cc 的宽度在300毫秒的时间变化
-    }).blur(function () { $(this).animate({ width: '153px' }, 500); })
-})
+        $(this).animate({ width: '360px' }, 500); // 是 cc 的宽度在300毫秒的时间变化
+    }).blur(function () { $(this).animate({ width: '153px' }, 500); });
+});
 
 window.alert = function (str) {
     var shield = document.createElement_x("DIV");
