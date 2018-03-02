@@ -70,13 +70,25 @@
             <div class="row">
                 @foreach (dynamic msg in ViewBag.Messages.Value)
                 {
-                    <div class="alert alert-dismissible alert-@msg.MsgType">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        @msg.Message
-                    </div>
+                <div class="alert alert-dismissible alert-@msg.MsgType">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    @msg.Message
+                </div>
                 }
             </div>
             @RenderBody()
+
+            <div id="message" class="panel panel-warning alert fade in" style="display: none;width: 260px; position: fixed; bottom: 0; right: 0;">
+                <div cass="panel-heading">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    Basic panel example
+                </div>
+                <div class="panel-body">
+                    Basic panel example;<br />
+                    Basic panel example;<br />
+                    Basic panel example;
+                </div>
+            </div>
         </div>
     </div>
 

@@ -4,11 +4,19 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Fleck;
+using MZBlog.Core;
+using MZBlog.Core.Commands.Posts;
+using MZBlog.Core.Documents;
 
 namespace MZBlog.Web.Security
 {
     public class Message
     {
+        public static ICommandInvokerFactory _commandInvoker;
+
+        public static List<IWebSocketConnection> _sockets = new List<IWebSocketConnection>();
+
         public const string userId = "59";
 
         public const string token = "a1f0f9ad-2bc9-41c6-9311-6cf8c59f5ab8";

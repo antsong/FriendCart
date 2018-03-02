@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Fleck, Version=0.14.0.59, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Fleck.0.14.0.59\lib\net40\Fleck.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="iBoxDB.NET2, Version=2.17.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\iBoxDB.2.17.1\lib\net20\iBoxDB.NET2.dll</HintPath>
       <Private>True</Private>

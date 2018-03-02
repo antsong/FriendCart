@@ -91,7 +91,7 @@ namespace MZBlog.Web
                 config.EnsureTable<Tag>(DBTableNames.Tags, "Slug");
                 config.EnsureTable<Log>(DBTableNames.Logs, "Id");
                 config.EnsureTable<Distribution>(DBTableNames.Distributions, "Id");
-                
+
                 var db = server.Open();
                 return db;
             }

@@ -41,9 +41,8 @@ namespace MZBlog.Web.Modules
         {
             var log = new Log
             {
-                Content = string.Format("{0}了接口{1}",
-                    DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分ss秒"),
-                    arg.Request.Url)
+                Content = string.Format("{0}：{1}调用了接口{2}", arg.Request.UserHostAddress,
+                    DateTime.Now.ToString("yyyy年MM月dd日 HH时mm分ss秒"), arg.Request.Url)
             };
 
             var command = new NewLogCommand

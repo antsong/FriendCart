@@ -70,3 +70,52 @@ window.alert = function (str) {
     alertFram.focus();
     document.body.onselectstart = function () { return false; };
 }
+
+var start = function () {
+    var socket = WebSocket || MozWebSocket;
+    try {
+        var ws = new socket('ws://192.168.0.106:8000');
+        ws.onmessage = function (evt) {
+            $.ajax({
+                type: "GET",
+                url: "/MZBlog.Web/2017/10/windows-ping-tai-shi-yong-gitblit-da-jian-git-fu-wu-qi-tu-wen-jiao-cheng",
+                dataType: "json",
+                success: function (data) {
+                    $('#message .panel-body').html(evt.data + '<br />' + data);
+                }
+            });
+            $('#message .panel-body').html('<br />' + evt.data);
+        };
+
+        ws.onopen = function () {
+            console.log('WebSocket启动链接');
+            window.wx = ws;
+            $('#message').show();
+        };
+
+        ws.onclose = function () {
+            console.log('WebSocket关闭链接');
+            window.wx = null;
+            delete wx;
+        };
+
+        ws.onerror = function (evt) {
+            console.log('WebSocket链接异常：' + evt.type);
+        }
+
+    } catch (e) {
+        console.log('异常信息：' + e);
+    }
+
+
+}
+window.onload = start;
+
+//test send 
+setInterval(function () {
+    if (!window.wx) {
+        return;
+    }
+    // todo 业务逻辑代码
+    //wx.send('Web:' + new Date());
+}, 5000);
