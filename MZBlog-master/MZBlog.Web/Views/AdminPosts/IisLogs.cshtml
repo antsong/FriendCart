@@ -1,0 +1,32 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<List<FileInfo>>
+@{
+    Layout = "_AdminLayout.cshtml";
+}
+
+<div class="row">
+    <ol class="breadcrumb">
+        <li><i class="fa fa-dashboard"></i> <a href="~/mz-admin">控制面板</a> </li>
+        <li class="active"><i class="fa fa-weixin"></i> 数据管理</li>
+    </ol>
+</div>
+
+<div class="row">
+
+    <table class="table table-bordered table-condensed table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" name="id" id="selectAll">
+                </th>
+                <th style="width: 50px;">路径</th>
+                <th style="width: 150px;">日志文件名称</th>
+                <th>大小</th>
+                <th class="text-center" style="width: 92px;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+
+</div>

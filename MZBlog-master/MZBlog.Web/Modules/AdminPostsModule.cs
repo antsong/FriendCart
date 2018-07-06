@@ -4,10 +4,12 @@ using MZBlog.Core.Commands.Posts;
 using MZBlog.Core.Extensions;
 using MZBlog.Core.ViewProjections.Admin;
 using MZBlog.Core.ViewProjections.Home;
+using MZBlog.Web.Features;
 using Nancy;
 using Nancy.Extensions;
 using Nancy.ModelBinding;
 using Nancy.Responses.Negotiation;
+using Newtonsoft.Json.Linq;
 
 namespace MZBlog.Web.Modules
 {
@@ -15,9 +17,12 @@ namespace MZBlog.Web.Modules
     {
         private readonly ICommandInvokerFactory _commandInvokerFactory;
 
+        private readonly IisLogs _iisLogs;
+
         public AdminPostsModule(IViewProjectionFactory factory, ICommandInvokerFactory commandInvokerFactory)
             : base(factory, commandInvokerFactory)
         {
+            _iisLogs = new IisLogs(AppConfiguration.Current.LogFilePath);
             _commandInvokerFactory = commandInvokerFactory;
             Get["/mz-admin/posts/{page?1}"] = _ => ShowPosts(_.page);
             Get["/mz-admin/posts/new"] = _ => ShowNewPost();
@@ -42,6 +47,20 @@ namespace MZBlog.Web.Modules
             Get["/mz-admin/resetpwd/{Id}"] = _ => ResetPassword(_.Id);
 
             Get["/mz-admin/logs/{page?1}"] = _ => GetLogs(_.page);
+
+            Get["/mz-admin/iislogs"] = _ => GetIisLogs(_.fileName);
+
+        }
+
+        private dynamic GetIisLogs(string fileName)
+        {
+            if (string.IsNullOrEmpty(fileName))
+            {
+                var files = _iisLogs.ReadFiles();
+                return View["IisLogs", files];
+            }
+
+            return new JArray(_iisLogs.GetLogDatas(_iisLogs.ReadFiles(fileName)));
         }
 
         private dynamic GetLogs(int page)

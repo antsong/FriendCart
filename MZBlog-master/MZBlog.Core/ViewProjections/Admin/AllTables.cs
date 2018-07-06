@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MZBlog.Core.ViewProjections.Admin
 {
@@ -105,7 +106,6 @@ namespace MZBlog.Core.ViewProjections.Admin
                 .OrderByDescending(x => x.CreatedOn)
                 .Skip(skip).Take(input.Take + 1)
                 .ToList().AsReadOnly();
-
 
             var hasNextPage = logs.Count > input.Take;
             return new AllTablesViewModel
