@@ -1,3 +1,26 @@
+﻿.wu-example {
+    position: relative;
+    padding: 45px 15px 15px;
+    margin: 15px 0;
+    background-color: #fafafa;
+    box-shadow: inset 0 3px 6px rgba(0, 0, 0, .05);
+    border-color: #e5e5e5 #eee #eee;
+    border-style: solid;
+    border-width: 1px 0;
+}
+
+    .wu-example:after {
+        content: "实例";
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 12px;
+        font-weight: bold;
+        color: #bbb;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
 .webuploader-container {
     position: relative;
 }
@@ -30,7 +53,7 @@
 }
 
 
-/*�ϴ�demo*/
+/*上传demo*/
 #container {
     color: #838383;
     font-size: 12px;
@@ -65,7 +88,7 @@
     min-height: 350px;
     padding-top: 178px;
     text-align: center;
-    /*background: url(../images/image.png) center 93px no-repeat;*/
+    background: url(images/image.png) center 93px no-repeat;
     color: #cccccc;
     font-size: 18px;
     position: relative;
@@ -173,15 +196,15 @@
                 width: 0;
                 height: 100%;
                 /*background: #1483d8 url(../images/progress.png) repeat-x;*/
-                -webit-transition: width 200ms linear;
+                /*-webit-transition: width 200ms linear;*/
                 -moz-transition: width 200ms linear;
                 -o-transition: width 200ms linear;
-                -ms-transition: width 200ms linear;
+                /*-ms-transition: width 200ms linear;*/
                 transition: width 200ms linear;
                 -webkit-animation: progressmove 2s linear infinite;
                 -moz-animation: progressmove 2s linear infinite;
                 -o-animation: progressmove 2s linear infinite;
-                -ms-animation: progressmove 2s linear infinite;
+                /*-ms-animation: progressmove 2s linear infinite;*/
                 animation: progressmove 2s linear infinite;
                 -webkit-transform: translateZ(0);
             }
@@ -216,6 +239,8 @@
     }
 }
 
+
+
 #uploader .filelist li p.imgWrap {
     position: relative;
     z-index: 2;
@@ -232,7 +257,7 @@
     -webit-transition: 200ms ease-out;
     -moz-transition: 200ms ease-out;
     -o-transition: 200ms ease-out;
-    -ms-transition: 200ms ease-out;
+    /*-ms-transition: 200ms ease-out;*/
     transition: 200ms ease-out;
 }
 
@@ -260,7 +285,7 @@
     height: 40px;
     width: 100%;
     z-index: 200;
-    /*background: url(../images/success.png) no-repeat right bottom;*/
+    background: url(images/success.png) no-repeat right bottom;
 }
 
 #uploader .filelist div.file-panel {
@@ -282,7 +307,7 @@
         float: right;
         text-indent: -9999px;
         overflow: hidden;
-        /*background: url(../images/icons.png) no-repeat;*/
+        background: url(images/icons.png) no-repeat;
         margin: 5px 1px 1px;
         cursor: pointer;
     }

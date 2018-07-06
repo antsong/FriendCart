@@ -99,6 +99,28 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+            <li>
+                <a href="@Url.Action("ItemType", "Admin")"><i class="fa fa-table fa-fw"></i> ItemType Tables</a>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> 软考<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        @Html.ActionLink("试题库", "Index", "Test")
+                    </li>
+                    <li>
+                        @Html.ActionLink("我要考试", "Edit", "Test")
+                    </li>
+                    <li>
+                        @Html.ActionLink("文件", "File", "Test")
+                    </li>
+                    <li>
+                        @Html.ActionLink("武汉社保咨询", "Question", "Test")
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

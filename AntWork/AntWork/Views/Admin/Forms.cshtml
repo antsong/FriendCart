@@ -55,7 +55,6 @@
                                                     </div>
                                                     <p>或将照片拖到这里，单次最多可选300张</p>
                                                 </div>
-                                                <ul class="filelist"></ul>
                                             </div>
                                             <div class="statusBar" style="display: none;">
                                                 <div class="progress" style="display: none;">
@@ -254,7 +253,7 @@
     @Scripts.Render("~/bundles/admin/uielement")
     <script>
 
-        BASE_URL = '~';
+        BASE_URL = '/AntWork';
 
         jQuery(function () {
             var $ = jQuery,    // just in case. Make sure it's not an other libaray.
@@ -262,8 +261,7 @@
                 $wrap = $('#uploader'),
 
                 // 图片容器
-                $queue = $('<ul class="filelist"></ul>')
-                    .appendTo($wrap.find('.queueList')),
+                $queue = $('<ul class="filelist"></ul>').appendTo($wrap.find('.queueList')),
 
                 // 状态栏，包括进度和控制按钮
                 $statusBar = $wrap.find('.statusBar'),
@@ -308,18 +306,15 @@
                             'OTransition' in s;
                     s = null;
                     return r;
-                })(),
-
-                // WebUploader实例
-                uploader;
+                })();
 
             if (!WebUploader.Uploader.support()) {
                 alert('Web Uploader 不支持您的浏览器！如果你使用的是IE浏览器，请尝试升级 flash 播放器');
                 throw new Error('WebUploader does not support the browser you are using.');
             }
 
-            // 实例化
-            uploader = WebUploader.create({
+            // WebUploader实例
+            var uploader = WebUploader.create({
                 pick: {
                     id: '#filePicker',
                     label: '点击选择图片'
@@ -329,7 +324,7 @@
 
                 accept: {
                     title: 'Images',
-                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    extensions: 'gif,jpg,jpeg,bmp,png,ico',
                     mimeTypes: 'image/*'
                 },
 
@@ -339,8 +334,7 @@
                 disableGlobalDnd: true,
 
                 chunked: true,
-                // server: 'http://webuploader.duapp.com/server/fileupload.php',
-                server: '/Admin/UploadFile',
+                server: BASE_URL + '/Admin/UploadFile',
                 fileNumLimit: 300,
                 fileSizeLimit: 5 * 1024 * 1024,    // 200 M
                 fileSingleSizeLimit: 1 * 1024 * 1024    // 50 M
@@ -369,6 +363,7 @@
                     $info = $('<p class="error"></p>'),
 
                     showError = function (code) {
+                        var text;
                         switch (code) {
                             case 'exceed_size':
                                 text = '文件大小超出';
@@ -468,25 +463,23 @@
                         });
                     } else {
                         $wrap.css('filter', 'progid:DXImageTransform.Microsoft.BasicImage(rotation=' + (~~((file.rotation / 90) % 4 + 4) % 4) + ')');
-                        // use jquery animate to rotation
-                        // $({
-                        //     rotation: rotation
-                        // }).animate({
-                        //     rotation: file.rotation
-                        // }, {
-                        //     easing: 'linear',
-                        //     step: function( now ) {
-                        //         now = now * Math.PI / 180;
+                        //use jquery animate to rotation
+                        $({
+                            rotation: rotation
+                        }).animate({
+                            rotation: file.rotation
+                        }, {
+                            easing: 'linear',
+                            step: function (now) {
+                                now = now * Math.PI / 180;
 
-                        //         var cos = Math.cos( now ),
-                        //             sin = Math.sin( now );
+                                var cos = Math.cos(now),
+                                    sin = Math.sin(now);
 
-                        //         $wrap.css( 'filter', "progid:DXImageTransform.Microsoft.Matrix(M11=" + cos + ",M12=" + (-sin) + ",M21=" + sin + ",M22=" + cos + ",SizingMethod='auto expand')");
-                        //     }
-                        // });
+                                $wrap.css('filter', "progid:DXImageTransform.Microsoft.Matrix(M11=" + cos + ",M12=" + (-sin) + ",M21=" + sin + ",M22=" + cos + ",SizingMethod='auto expand')");
+                            }
+                        });
                     }
-
-
                 });
 
                 $li.appendTo($queue);
@@ -504,15 +497,14 @@
             function updateTotalProgress() {
                 var loaded = 0,
                     total = 0,
-                    spans = $progress.children(),
-                    percent;
+                    spans = $progress.children();
 
                 $.each(percentages, function (k, v) {
                     total += v[0];
                     loaded += v[0] * v[1];
                 });
 
-                percent = total ? loaded / total : 0;
+                var percent = total ? loaded / total : 0;
 
                 spans.eq(0).text(Math.round(percent * 100) + '%');
                 spans.eq(1).css('width', Math.round(percent * 100) + '%');
@@ -599,13 +591,16 @@
                     case 'finish':
                         stats = uploader.getStats();
                         if (stats.successNum) {
-                            alert('上传成功');
+                            //todo 上传成功后处理
+                            console.log(stats);
                         } else {
                             // 没有成功的图片，重设
                             state = 'done';
                             location.reload();
                         }
                         break;
+                    default:
+                        console.log(state);
                 }
 
                 updateStatus();
@@ -653,15 +648,14 @@
                     case 'uploadFinished':
                         setState('confirm');
                         break;
-
                     case 'startUpload':
                         setState('uploading');
                         break;
-
                     case 'stopUpload':
                         setState('paused');
                         break;
-
+                    default:
+                        console.log(type);
                 }
             });
 
@@ -681,6 +675,7 @@
                 } else if (state === 'uploading') {
                     uploader.stop();
                 }
+                return false;
             });
 
             $info.on('click', '.retry', function () {

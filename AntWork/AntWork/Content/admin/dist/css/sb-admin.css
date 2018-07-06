@@ -408,8 +408,8 @@ table.dataTable thead .sorting:after {
   }
   ul.timeline > li > .timeline-panel {
     width: calc(10%);
-    width: -moz-calc(10%);
-    width: -webkit-calc(10%);
+    width: -moz-calc(75%);
+    width: -webkit-calc(75%);
   }
   ul.timeline > li > .timeline-badge {
     top: 16px;

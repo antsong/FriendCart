@@ -32,7 +32,7 @@ namespace AntWork
                 Include("~/Content/admin/jquery/jquery.min.js").
                 Include("~/Content/admin/bootstrap/js/bootstrap.min.js").
                 Include("~/Content/admin/metisMenu/metisMenu.min.js").
-                Include("~/Content/admin/raphael/raphael.min.js").
+                Include("~/Content/admin/raphael/raphael.js").
                 Include("~/Content/admin/morrisjs/morris.min.js").
                 Include("~/Scripts/data/morris-data.js").
                 Include("~/Content/admin/dist/js/sb-admin-2.min.js"));

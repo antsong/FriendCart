@@ -1,12 +1,13 @@
 ﻿################################################################################
 # 此 .gitignore 文件已由 Microsoft(R) Visual Studio 自动创建。
 ################################################################################
-
+/AntWork/packages
 /AntWork/AntWork/bin
 /AntWork/AntWork/obj
-/AntWork/packages
+/AntWork/AntWork/App_Data
+/AntWork/AntWork/fppData/Uploads
+/AntWork/AntWork/log/log4net
 /AntWork/Entity/Properties
 /AntWork/Entity/bin
 /AntWork/Entity/obj
-/AntWork/AntWork/fppData/Uploads
-/AntWork/AntWork/log/log4net
+/AntWork/AntWork.Tests/obj
