@@ -3,7 +3,10 @@
 ################################################################################
 
 /AntWork/AntWork/bin
+/AntWork/AntWork/obj
 /AntWork/packages
 /AntWork/Entity/Properties
 /AntWork/Entity/bin
 /AntWork/Entity/obj
+/AntWork/AntWork/fppData/Uploads
+/AntWork/AntWork/log/log4net
